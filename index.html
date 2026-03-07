@@ -3,279 +3,566 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>🧠 REEC · Advanced Relationship Assessment</title>
-<meta name="title" content="🧠 REEC · Multi‑Dimensional Relationship Tool">
-<meta name="description" content="Research‑based assessment with 30 indicators, multi‑hypothesis recommendations, combination patterns, severity levels, and full citations.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>REEC 2.0 · Advanced Relationship Assessment</title>
+<meta name="description" content="48 indicators · 11 dimensions · 11 hypotheses · radar profiling · risk detection · evidence-based guidance">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy: #2c3e50;
-  --navy-mid: #34495e;
-  --navy-light: #5d6d7e;
-  --steel: #7f8c8d;
-  --sky: #3498db;
-  --sky-light: #5dade2;
-  --amber: #f39c12;
-  --amber-light: #f7b731;
-  --cream: #f8f9f9;
-  --slate: #bdc3c7;
-  --white: #ffffff;
-  --bg: #ecf0f1;
-  --card-bg: #ffffff;
-  --border: #d5dbdb;
-  --text: #2c3e50;
-  --muted: #7f8c8d;
-  --success: #27ae60;
-  --warn: #e67e22;
-  --danger: #e74c3c;
-  --shadow-card: 0 10px 40px -10px rgba(0,0,0,0.1);
-  --r-lg: 16px;
-  --r-xl: 24px;
-  --r-pill: 50px;
+  --bg: #0e131d;
+  --surface: #161e2e;
+  --surface2: #1e2840;
+  --surface3: #253050;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #dce8f5;
+  --text2: #a0b8d4;
+  --muted: #5c7898;
+  --gold: #f0b429;
+  --gold-dim: rgba(240,180,41,0.12);
+  --gold-bright: #fcd34d;
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45,212,191,0.1);
+  --crimson: #f43f5e;
+  --crimson-dim: rgba(244,63,94,0.1);
+  --emerald: #34d399;
+  --emerald-dim: rgba(52,211,153,0.1);
+  --sky: #38bdf8;
+  --sky-dim: rgba(56,189,248,0.1);
+  --amber: #fb923c;
+  --amber-dim: rgba(251,146,60,0.1);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.1);
+  --shadow: 0 24px 60px -12px rgba(0,0,0,0.6);
+  --shadow-sm: 0 4px 20px rgba(0,0,0,0.3);
+  --r: 16px;
+  --r-lg: 22px;
+  --r-xl: 28px;
+  --r-pill: 999px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
 }
+/* ── HEADER ── */
 header {
-  background: var(--navy);
-  padding: 2rem 1rem 1.5rem;
+  background: linear-gradient(135deg, #0a0f18 0%, #0e1829 50%, #111e35 100%);
+  border-bottom: 1px solid var(--border2);
+  padding: 2.2rem 1.5rem 1.8rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(240,180,41,0.07) 0%, transparent 70%);
+  pointer-events: none;
 }
 header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: white;
+  letter-spacing: -0.02em;
 }
-header p { color: #bdc3c7; margin-top: 0.5rem; }
-.header-badges { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
-.hbadge { background: rgba(255,255,255,0.1); color: #5dade2; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-family: monospace; }
-.app { max-width: 1600px; margin: 0 auto; padding: 1.5rem 1rem; }
-.layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; }
-@media (max-width:1100px){ .layout{ grid-template-columns:1fr; } }
+header h1 span { color: var(--gold); }
+header p { color: var(--text2); margin-top: 0.4rem; font-size: 0.88rem; font-weight: 300; }
+.header-pills { display: flex; gap: 0.45rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.hpill {
+  background: rgba(255,255,255,0.06); color: var(--text2);
+  padding: 0.28rem 0.85rem; border-radius: var(--r-pill);
+  font-size: 0.68rem; font-family: 'JetBrains Mono', monospace;
+  border: 1px solid var(--border);
+  letter-spacing: 0.02em;
+}
+/* ── LAYOUT ── */
+.app { max-width: 1700px; margin: 0 auto; padding: 1.5rem 1.2rem 3rem; }
+.layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; align-items: start; }
+@media(max-width:1140px){ .layout{ grid-template-columns: 1fr; } }
+/* ── CARD ── */
 .card {
-  background: white;
-  border-radius: 24px;
-  box-shadow: var(--shadow-card);
+  background: var(--surface);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card-header {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,0.02);
+}
+.card-header h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.25rem; font-weight: 600;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.card-body { padding: 1.3rem 1.5rem; }
+/* ── TOOLBAR ── */
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  background: var(--surface2); border-radius: var(--r-pill);
+  padding: 0.6rem 0.9rem; margin-bottom: 1.4rem;
   border: 1px solid var(--border);
 }
-.card-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.7rem; }
-.card-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); }
-.card-body { padding: 1.2rem 1.5rem; }
-.learner-toolbar {
-  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
-  background: #f0f3f4; border-radius: 50px; padding: 0.7rem 1rem; margin-bottom: 1.5rem;
+.toolbar select {
+  background: var(--surface3); color: var(--text);
+  border: 1px solid var(--border2); border-radius: var(--r-pill);
+  padding: 0.45rem 0.9rem; font-size: 0.82rem; font-family: 'Outfit', sans-serif;
+  cursor: pointer; min-height: 38px;
 }
 .tbtn {
-  display: inline-flex; align-items: center; gap: 5px; background: white;
-  border: 1.5px solid var(--border); border-radius: 50px; padding: 0.6rem 1rem;
-  font-size: 0.85rem; cursor: pointer; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface3); border: 1px solid var(--border2);
+  border-radius: var(--r-pill); padding: 0.42rem 0.9rem;
+  font-size: 0.8rem; font-family: 'Outfit', sans-serif;
+  color: var(--text2); cursor: pointer; min-height: 38px;
+  transition: all 0.18s;
 }
-.tbtn.accent { background: var(--navy); color: white; border-color: var(--navy); }
-.tbtn.danger { color: var(--danger); border-color: #f5b7b1; background: #fdedec; }
-.learner-count { margin-left: auto; font-size: 0.8rem; color: var(--muted); font-family: monospace; }
-.phase-section { margin-bottom: 1.8rem; }
-.phase-label { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
-.phase-badge { background: var(--navy); color: var(--amber); padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.7rem; text-transform: uppercase; }
-.phase-title { font-size: 0.9rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
-.question-item {
-  background: #f8f9f9; border-radius: 16px; padding: 1rem; border: 1.5px solid #e5e8e8; margin-bottom: 0.8rem;
+.tbtn:hover { background: var(--surface); border-color: var(--gold); color: var(--gold); }
+.tbtn.accent { background: var(--gold); color: #0e131d; border-color: var(--gold); font-weight: 600; }
+.tbtn.accent:hover { background: var(--gold-bright); }
+.tbtn.danger { color: var(--crimson); border-color: rgba(244,63,94,0.3); }
+.tbtn.danger:hover { background: var(--crimson-dim); }
+.toolbar-count { margin-left: auto; font-size: 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+/* ── PROGRESS ── */
+.progress-bar-wrap { margin-bottom: 1.4rem; }
+.progress-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; }
+.progress-track { height: 5px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 3px; transition: width 0.4s ease; }
+/* ── DIMENSION SECTIONS ── */
+.dim-section { margin-bottom: 1.5rem; }
+.dim-label {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 0.9rem; padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer; user-select: none;
 }
-.q-text { font-size: 0.95rem; font-weight: 500; color: var(--navy); margin-bottom: 0.8rem; }
-.q-options { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-.q-option {
-  display: flex; align-items: center; gap: 4px; background: white; border: 1.5px solid #d0d3d4;
-  border-radius: 50px; padding: 0.4rem 0.8rem; font-size: 0.75rem; cursor: pointer; flex: 1 0 auto; justify-content: center;
+.dim-badge {
+  background: var(--surface3); color: var(--gold);
+  padding: 0.22rem 0.7rem; border-radius: var(--r-pill);
+  font-size: 0.66rem; font-family: 'JetBrains Mono', monospace;
+  border: 1px solid rgba(240,180,41,0.2);
 }
-.q-option.sel-5 { background: #1e8449; color: white; }
-.q-option.sel-4 { background: #27ae60; color: white; }
-.q-option.sel-3 { background: #f39c12; color: white; }
-.q-option.sel-2 { background: #e67e22; color: white; }
-.q-option.sel-1 { background: #e74c3c; color: white; }
-.q-option.sel-0 { background: #95a5a6; color: white; }
-.id-panel {
-  background: var(--navy); border-radius: 24px; color: white; position: sticky; top: 1rem;
-  padding: 1.2rem 1.5rem;
+.dim-name { font-size: 0.82rem; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; flex: 1; }
+.dim-score-mini { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.dim-toggle { font-size: 0.8rem; color: var(--muted); transition: transform 0.2s; }
+.dim-toggle.open { transform: rotate(180deg); }
+.dim-body { overflow: hidden; transition: max-height 0.35s ease; }
+/* ── QUESTION ITEMS ── */
+.q-item {
+  background: var(--surface2); border-radius: var(--r);
+  padding: 0.9rem 1rem; border: 1px solid var(--border);
+  margin-bottom: 0.7rem; transition: border-color 0.2s;
 }
-.id-learner-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.2rem; }
-.id-subtitle { font-size: 0.7rem; color: #bdc3c7; margin-bottom: 1rem; }
-.id-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-.id-lbl { width: 100px; font-size: 0.7rem; color: #5dade2; text-transform: uppercase; }
-.id-val { font-weight: 600; }
-.chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 0.5rem 0; }
-.chip { padding: 0.25rem 0.8rem; border-radius: 50px; font-size: 0.7rem; border: 1px solid; }
-.chip.blue { background: rgba(52,152,219,0.2); border-color: rgba(52,152,219,0.4); color: #a9cce3; }
-.chip.green { background: rgba(39,174,96,0.2); border-color: rgba(39,174,96,0.4); color: #a9dfbf; }
-.chip.red { background: rgba(231,76,60,0.2); border-color: rgba(231,76,60,0.4); color: #f5b7b1; }
-.chip.amber { background: rgba(243,156,18,0.2); border-color: rgba(243,156,18,0.4); color: #f9e79f; }
-.chip.purple { background: rgba(155,89,182,0.2); border-color: rgba(155,89,182,0.4); color: #d2b4de; }
-.score-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
-.score-lbl { width: 45px; font-size: 0.7rem; color: #bdc3c7; }
-.score-track { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
-.score-fill { height: 100%; border-radius: 4px; transition: width 0.4s; }
-.score-pct { width: 45px; font-size: 0.7rem; color: #bdc3c7; text-align: right; }
-.rec-section { margin-top: 1rem; }
-.rec-header { display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; }
-.rec-header h3 { font-size: 1rem; color: #5dade2; }
-.rec-count { margin-left: auto; background: rgba(255,255,255,0.1); padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.7rem; }
+.q-item.answered { border-color: rgba(240,180,41,0.2); }
+.q-text { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.7rem; line-height: 1.4; }
+.q-source { font-size: 0.65rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.q-scale { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.q-btn {
+  flex: 1 0 auto; min-width: 70px;
+  padding: 0.38rem 0.5rem; border-radius: var(--r-pill);
+  border: 1px solid var(--border2); background: var(--surface3);
+  color: var(--muted); font-size: 0.72rem; font-family: 'Outfit', sans-serif;
+  cursor: pointer; text-align: center; transition: all 0.15s; min-height: 36px;
+}
+.q-btn:hover { border-color: var(--gold); color: var(--gold); }
+.q-btn.s0 { background: #374151; border-color: #4b5563; color: #9ca3af; }
+.q-btn.s1 { background: #1e3a5f; border-color: #2563eb; color: #93c5fd; }
+.q-btn.s2 { background: #365314; border-color: #65a30d; color: #bef264; }
+.q-btn.s3 { background: #713f12; border-color: #d97706; color: #fde68a; }
+.q-btn.s4 { background: #7c2d12; border-color: #ea580c; color: #fdba74; }
+.q-btn.s5 { background: #7f1d1d; border-color: #dc2626; color: #fca5a5; }
+/* ── RIGHT PANEL ── */
+.result-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow);
+  position: sticky; top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.4rem 1.3rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface3) transparent;
+}
+.result-panel::-webkit-scrollbar { width: 5px; }
+.result-panel::-webkit-scrollbar-track { background: transparent; }
+.result-panel::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+.panel-top { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.panel-title { font-family: 'Crimson Pro', serif; font-size: 1.3rem; font-weight: 600; }
+.panel-timestamp { margin-left: auto; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.quick-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.qbtn {
+  flex: 1; min-width: 90px; padding: 0.55rem 0.5rem; border-radius: var(--r-pill);
+  border: 1px solid var(--border2); background: var(--surface2);
+  color: var(--text2); font-size: 0.73rem; font-family: 'Outfit', sans-serif;
+  cursor: pointer; text-align: center; transition: all 0.18s; min-height: 38px;
+}
+.qbtn:hover { border-color: var(--gold); color: var(--gold); }
+/* ── ATTACHMENT TYPE BADGE ── */
+.attach-badge {
+  border-radius: var(--r); padding: 1rem 1.2rem;
+  margin-bottom: 1.1rem; border: 1px solid;
+}
+.attach-badge.secure { background: var(--emerald-dim); border-color: rgba(52,211,153,0.25); }
+.attach-badge.anxious { background: var(--amber-dim); border-color: rgba(251,146,60,0.25); }
+.attach-badge.avoidant { background: var(--sky-dim); border-color: rgba(56,189,248,0.25); }
+.attach-badge.fearful { background: var(--crimson-dim); border-color: rgba(244,63,94,0.25); }
+.attach-badge .ab-name { font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; }
+.attach-badge .ab-sub { font-size: 0.72rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.attach-badge .ab-meta { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+.attach-badge .ab-kv { font-size: 0.75rem; }
+.attach-badge .ab-kv .k { color: var(--muted); margin-right: 0.3rem; }
+.attach-badge .ab-kv .v { font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+/* ── RADAR CHART ── */
+.radar-wrap {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 0.8rem;
+  margin-bottom: 1.1rem; position: relative;
+}
+.radar-title { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; text-align: center; }
+#radarSvg { display: block; margin: 0 auto; }
+.radar-legend { display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem; flex-wrap: wrap; }
+.rl-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.68rem; color: var(--muted); }
+.rl-dot { width: 10px; height: 10px; border-radius: 50%; }
+/* ── HYPOTHESIS BARS ── */
+.section-title { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.7rem; margin-top: 1.1rem; display: flex; align-items: center; gap: 0.4rem; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.hyp-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+.hyp-lbl { width: 42px; font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.hyp-name { flex: 1; font-size: 0.75rem; color: var(--text2); }
+.hyp-track { width: 100px; height: 7px; background: var(--surface3); border-radius: 4px; overflow: hidden; }
+.hyp-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.hyp-pct { width: 38px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-align: right; }
+/* ── RISK FLAGS ── */
+.risk-wrap { margin-bottom: 1rem; }
+.risk-flag {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  padding: 0.65rem 0.9rem; border-radius: var(--r);
+  margin-bottom: 0.5rem; border: 1px solid;
+}
+.risk-flag.high { background: var(--crimson-dim); border-color: rgba(244,63,94,0.3); }
+.risk-flag.moderate { background: var(--amber-dim); border-color: rgba(251,146,60,0.25); }
+.risk-flag .rf-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.risk-flag .rf-body { flex: 1; }
+.risk-flag .rf-text { font-size: 0.8rem; font-weight: 500; }
+.risk-flag .rf-ref { font-size: 0.65rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-top: 0.2rem; }
+/* ── NARRATIVE ── */
+.narrative-wrap {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  font-size: 0.82rem; line-height: 1.65; color: var(--text2);
+}
+.narrative-wrap em { color: var(--gold); font-style: italic; }
+/* ── RECOMMENDATIONS ── */
 .rec-item {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
-  padding: 0.8rem 1rem; margin-bottom: 0.7rem; cursor: pointer;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem; cursor: pointer; transition: border-color 0.2s;
 }
-.rec-item-top { display: flex; align-items: flex-start; gap: 0.5rem; }
-.rec-icon { font-size: 1.1rem; }
-.rec-text { font-size: 0.85rem; font-weight: 500; flex: 1; }
-.rec-expand-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: #5dade2; border-radius: 50px; padding: 0.2rem 0.6rem; font-size: 0.65rem; cursor: pointer; }
-.rec-detail { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-.rec-detail.open { max-height: 800px; }
-.rec-detail-inner { margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px dashed rgba(255,255,255,0.1); }
-.rec-why { font-size: 0.8rem; color: #d0d3d4; margin-bottom: 0.5rem; }
-.rec-how { font-size: 0.78rem; color: #aeb6bf; margin-bottom: 0.5rem; }
-.rec-citation { display: inline-block; background: rgba(243,156,18,0.1); border: 1px solid rgba(243,156,18,0.2); color: #f9e79f; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.65rem; margin-right: 0.3rem; margin-bottom: 0.3rem; }
-.export-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
-.export-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.export-btn {
-  flex: 1; min-width: 120px; padding: 0.7rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
-  cursor: pointer; border: none; min-height: 44px;
+.rec-item:hover { border-color: var(--border2); }
+.rec-top { display: flex; align-items: flex-start; gap: 0.5rem; }
+.rec-icon { font-size: 1.05rem; flex-shrink: 0; }
+.rec-text { font-size: 0.82rem; font-weight: 500; flex: 1; }
+.rec-xbtn { background: none; border: 1px solid var(--border2); color: var(--sky); border-radius: var(--r-pill); padding: 0.18rem 0.6rem; font-size: 0.62rem; cursor: pointer; flex-shrink: 0; }
+.rec-detail { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+.rec-detail.open { max-height: 1000px; }
+.rec-inner { padding-top: 0.7rem; margin-top: 0.7rem; border-top: 1px dashed var(--border2); }
+.rec-why { font-size: 0.78rem; color: var(--text2); margin-bottom: 0.4rem; }
+.rec-how { font-size: 0.76rem; color: var(--muted); margin-bottom: 0.5rem; }
+.cite-pill {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  background: var(--gold-dim); border: 1px solid rgba(240,180,41,0.2);
+  color: var(--gold); padding: 0.22rem 0.65rem; border-radius: var(--r-pill);
+  font-size: 0.63rem; margin: 0.2rem 0.2rem 0 0;
 }
-.export-btn.primary { background: var(--amber); color: var(--navy); }
-.export-btn.secondary { background: rgba(255,255,255,0.08); color: #5dade2; border: 1px solid rgba(255,255,255,0.2); }
-.sources-note { font-size: 0.65rem; color: #bdc3c7; text-align: center; margin-top: 0.5rem; }
+/* ── EXPORT BUTTONS ── */
+.export-wrap { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.export-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.exbtn {
+  padding: 0.7rem; border-radius: var(--r-pill);
+  border: 1px solid var(--border2); background: var(--surface2);
+  color: var(--text2); font-size: 0.78rem; font-family: 'Outfit', sans-serif;
+  cursor: pointer; text-align: center; transition: all 0.18s; min-height: 42px;
+}
+.exbtn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.exbtn.primary { background: var(--gold); color: #0e131d; border-color: var(--gold); font-weight: 600; grid-column: span 2; }
+.exbtn.primary:hover { background: var(--gold-bright); }
+.sources-line { font-size: 0.6rem; color: var(--muted); text-align: center; margin-top: 0.7rem; line-height: 1.4; }
+/* ── CHIP ── */
+.chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+.chip {
+  padding: 0.22rem 0.75rem; border-radius: var(--r-pill);
+  font-size: 0.67rem; border: 1px solid; font-family: 'JetBrains Mono', monospace;
+}
+.chip.gold { background: var(--gold-dim); border-color: rgba(240,180,41,0.3); color: var(--gold); }
+.chip.teal { background: var(--teal-dim); border-color: rgba(45,212,191,0.3); color: var(--teal); }
+.chip.crimson { background: var(--crimson-dim); border-color: rgba(244,63,94,0.3); color: var(--crimson); }
+.chip.emerald { background: var(--emerald-dim); border-color: rgba(52,211,153,0.3); color: var(--emerald); }
+.chip.sky { background: var(--sky-dim); border-color: rgba(56,189,248,0.3); color: var(--sky); }
+.chip.purple { background: var(--purple-dim); border-color: rgba(167,139,250,0.3); color: var(--purple); }
+/* ── TOAST ── */
 .toast {
-  position: fixed; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; max-width: 400px; margin: 0 auto;
-  background: var(--navy); color: white; padding: 0.8rem 1.2rem; border-radius: 14px;
-  border-left: 4px solid var(--success); z-index: 9999; transform: translateY(100px); opacity: 0;
-  transition: 0.3s; text-align: center; pointer-events: none;
+  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--surface); color: var(--text); padding: 0.8rem 1.4rem;
+  border-radius: var(--r-pill); border: 1px solid var(--border2);
+  box-shadow: var(--shadow-sm); z-index: 9999; opacity: 0;
+  transition: all 0.3s; pointer-events: none; font-size: 0.82rem;
+  white-space: nowrap;
 }
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast.error { border-left-color: var(--danger); }
-.reset-link { color: var(--sky); font-size: 0.8rem; cursor: pointer; text-decoration: underline; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.ok { border-color: rgba(52,211,153,0.4); }
+.toast.err { border-color: rgba(244,63,94,0.4); }
+/* ── MODAL ── */
 .modal-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(44,62,80,0.9); backdrop-filter: blur(5px); z-index: 10000;
-  display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
-  transition: opacity 0.3s; padding: 1rem;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+  z-index: 10000; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 1rem;
 }
-.modal-overlay.show { opacity: 1; pointer-events: auto; }
-.modal-content {
-  background: white; border-radius: 24px; max-width: 900px; max-height: 85vh; overflow-y: auto;
-  padding: 2rem 1.5rem; position: relative;
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--r-xl); max-width: 780px; width: 100%;
+  max-height: 84vh; overflow-y: auto; padding: 2rem 1.8rem;
+  position: relative; box-shadow: var(--shadow);
 }
 .modal-close {
-  position: absolute; top: 1rem; right: 1rem; width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(52,152,219,0.1); border: none; font-size: 1.2rem; cursor: pointer;
+  position: absolute; top: 1rem; right: 1rem;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--text2); font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-box h2 { font-family: 'Crimson Pro', serif; font-size: 1.6rem; margin-bottom: 1rem; color: var(--gold); }
+.modal-box h3 { font-size: 1rem; color: var(--teal); margin: 1rem 0 0.5rem; }
+.modal-box p, .modal-box li { font-size: 0.85rem; color: var(--text2); line-height: 1.65; margin-bottom: 0.5rem; }
+.modal-box ul { padding-left: 1.2rem; }
+.modal-box em { color: var(--gold-bright); }
+/* ── COUPLE COMPARE ── */
+.compare-toggle { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; font-size: 0.78rem; color: var(--muted); }
+.compare-toggle input[type=checkbox] { accent-color: var(--gold); width: 15px; height: 15px; }
+.compare-selects { display: flex; gap: 0.5rem; margin-bottom: 0.8rem; }
+.compare-selects select {
+  flex: 1; background: var(--surface2); color: var(--text);
+  border: 1px solid var(--border2); border-radius: var(--r-pill);
+  padding: 0.4rem 0.8rem; font-size: 0.78rem; font-family: 'Outfit', sans-serif;
+}
+/* ── DIM SCORE TABLE ── */
+.dim-table { margin-top: 0.3rem; }
+.dt-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; }
+.dt-label { width: 100px; font-size: 0.7rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dt-track { flex: 1; height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+.dt-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+.dt-val { width: 35px; font-size: 0.67rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-align: right; }
+/* ── PRINT ── */
+@media print {
+  body { background: white; color: black; }
+  .result-panel { position: static; max-height: none; box-shadow: none; }
+  .card, .result-panel { border: 1px solid #ccc; border-radius: 12px; }
+  .card-body, .toolbar, .quick-btns, .export-wrap { display: none; }
 }
 </style>
 </head>
 <body>
+
 <header>
-  <div class="header-inner">
-    <h1>🧠 REEC · Advanced</h1>
-    <p>30 indicators · 8 dimensions · multi‑hypothesis recommendations · severity levels · combination patterns · full citations</p>
-    <div class="header-badges">
-      <span class="hbadge">Attachment Theory</span>
-      <span class="hbadge">Gottman Method</span>
-      <span class="hbadge">Boundary Theory</span>
-      <span class="hbadge">Investment Model</span>
-    </div>
+  <h1>🧠 REEC <span>2.0</span></h1>
+  <p>Evidence-based relationship assessment · 48 indicators · 11 dimensions · research-informed guidance</p>
+  <div class="header-pills">
+    <span class="hpill">ECR-R · Brennan 1998</span>
+    <span class="hpill">Gottman Four Horsemen</span>
+    <span class="hpill">RRBS · Hutchison 2024</span>
+    <span class="hpill">Investment Model · Rusbult</span>
+    <span class="hpill">DERS · Gratz & Roemer 2004</span>
+    <span class="hpill">Satir Communication</span>
+    <span class="hpill">Main & Hesse Disorganized</span>
   </div>
 </header>
 
 <div class="app">
   <div class="layout">
-    <!-- LEFT PANEL: QUESTIONS -->
+
+    <!-- ═══ LEFT: QUESTIONS ═══ -->
     <div class="card">
-      <div class="card-header"><span class="icon">📋</span><h2>Relationship Assessment</h2></div>
+      <div class="card-header"><span>📋</span><h2>Assessment</h2></div>
       <div class="card-body">
-        <div class="learner-toolbar" id="learnerToolbar">
-          <div class="toolbar-group">
-            <select id="learnerSelect"></select>
-            <button class="tbtn accent" id="addBtn">➕ Add</button>
-            <button class="tbtn" id="renameBtn">✏️ Rename</button>
-            <button class="tbtn danger" id="deleteBtn">🗑️ Delete</button>
-          </div>
-          <span class="learner-count" id="learnerCount">1 person</span>
+
+        <div class="toolbar" id="toolbar">
+          <select id="profileSel"></select>
+          <button class="tbtn accent" id="addBtn">➕ Add</button>
+          <button class="tbtn" id="renameBtn">✏️ Rename</button>
+          <button class="tbtn danger" id="delBtn">🗑️ Delete</button>
+          <span class="toolbar-count" id="profileCount">1 person</span>
         </div>
-        <!-- 8 dimensions -->
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 1</span><span class="phase-title">Attachment Anxiety</span></div><div id="dim1"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 2</span><span class="phase-title">Attachment Avoidance</span></div><div id="dim2"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 3</span><span class="phase-title">Boundary Styles</span></div><div id="dim3"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 4</span><span class="phase-title">Conflict Patterns</span></div><div id="dim4"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 5</span><span class="phase-title">Relationship Evaluation</span></div><div id="dim5"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 6</span><span class="phase-title">Emotional Intensity</span></div><div id="dim6"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 7</span><span class="phase-title">Reciprocity</span></div><div id="dim7"></div></div>
-        <div class="phase-section"><div class="phase-label"><span class="phase-badge">Dim 8</span><span class="phase-title">Commitment</span></div><div id="dim8"></div></div>
-        <div class="divider"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span>Completed: <span id="completedCount">0/30</span></span>
-          <span class="reset-link" id="resetBtn">↻ Reset</span>
+
+        <div class="progress-bar-wrap">
+          <div class="progress-label">
+            <span>Completion</span>
+            <span id="progressText">0 / 48</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+
+        <div id="dimContainer"></div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;">
+          <span style="font-size:0.78rem;color:var(--muted);">Rate each item 0 (Never) → 5 (Always)</span>
+          <button class="tbtn danger" id="resetBtn">↻ Reset</button>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT PANEL: RESULTS -->
-    <div class="id-panel">
-      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
-        <span style="font-size:1.3rem;">🪪</span>
-        <h2 style="font-size:1.3rem;">Profile</h2>
-        <span class="sub" id="idTimestamp" style="margin-left:auto;">—</span>
+    <!-- ═══ RIGHT: RESULTS ═══ -->
+    <div class="result-panel" id="resultPanel">
+      <div class="panel-top">
+        <span>🪪</span>
+        <span class="panel-title">Profile</span>
+        <span class="panel-timestamp" id="timestamp">—</span>
       </div>
-      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
-        <button class="export-btn secondary" id="guidanceBtn">📖 Guidance</button>
-        <button class="export-btn secondary" id="loadSampleBtn">🧪 Sample</button>
-        <button class="export-btn secondary" id="saveJsonBtn">💾 Save JSON</button>
-        <label class="export-btn secondary">📂 Load JSON<input type="file" id="loadJsonInput" style="display:none;"></label>
+
+      <div class="quick-btns">
+        <button class="qbtn" id="guidanceBtn">📖 Manual</button>
+        <button class="qbtn" id="sampleBtn">🧪 Sample</button>
+        <button class="qbtn" id="saveJsonBtn">💾 Save</button>
+        <label class="qbtn">📂 Load<input type="file" id="loadFileInput" style="display:none;" accept=".json"></label>
       </div>
-      <div class="id-badge">
-        <div class="id-learner-name" id="idName">—</div>
-        <div class="id-subtitle">PRIMARY HYPOTHESIS</div>
-        <div class="id-row"><span class="id-lbl">Primary</span><span class="id-val" id="idPrimary">—</span></div>
-        <div class="chip-row" id="idHypChips"></div>
-        <div class="id-row"><span class="id-lbl">Confidence</span><span class="id-val" id="idConfidence">—</span></div>
-        <div class="id-row"><span class="id-lbl">Trajectory</span><span class="id-val" id="idTrajectory">—</span></div>
+
+      <!-- Couple Compare Toggle -->
+      <div class="compare-toggle">
+        <input type="checkbox" id="compareCheck">
+        <label for="compareCheck">Compare two profiles on radar</label>
       </div>
-      <div class="score-section" id="hypBars"></div>
-      <div class="rec-section">
-        <div class="rec-header"><h3>📘 Guidance</h3><span class="rec-count" id="recCount">0</span></div>
-        <div id="recList"></div>
+      <div class="compare-selects" id="compareSelects" style="display:none;">
+        <select id="compareA"></select>
+        <select id="compareB"></select>
       </div>
-      <div class="export-section">
-        <div class="export-row"><button class="export-btn primary" id="exportPdfBtn">🖨️ Print</button><button class="export-btn secondary" id="exportCsvBtn">📊 CSV</button></div>
-        <div class="export-row"><button class="export-btn secondary" id="exportHtmlBtn">🌐 HTML</button><button class="export-btn secondary" id="exportDcmBtn">📦 DCMI</button></div>
+
+      <!-- Attachment Type Badge -->
+      <div class="attach-badge secure" id="attachBadge">
+        <div class="ab-sub">Bartholomew & Horowitz (1991) · Four-Category Model</div>
+        <div class="ab-name" id="attachType">—</div>
+        <div class="ab-meta">
+          <div class="ab-kv"><span class="k">Confidence</span><span class="v" id="confVal">—</span></div>
+          <div class="ab-kv"><span class="k">Trajectory</span><span class="v" id="trajVal">—</span></div>
+          <div class="ab-kv"><span class="k">Primary</span><span class="v" id="primaryHyp">—</span></div>
+        </div>
       </div>
-      <div class="sources-note">Bowlby, Ainsworth, Gottman, Mikulincer, Hutchison, Rusbult</div>
+
+      <!-- Radar Chart -->
+      <div class="radar-wrap">
+        <div class="radar-title">Dimensional Profile · 11 Axes</div>
+        <svg id="radarSvg" width="300" height="300" viewBox="0 0 300 300"></svg>
+        <div class="radar-legend">
+          <div class="rl-item" id="legend1"><div class="rl-dot" style="background:var(--gold)"></div><span id="legendLabel1">Profile</span></div>
+          <div class="rl-item" id="legend2" style="display:none;"><div class="rl-dot" style="background:var(--teal)"></div><span id="legendLabel2">Compare</span></div>
+        </div>
+      </div>
+
+      <!-- Dimension scores -->
+      <div class="section-title">Dimension Scores</div>
+      <div class="dim-table" id="dimTable"></div>
+
+      <!-- Hypothesis probability bars -->
+      <div class="section-title">Hypothesis Probabilities</div>
+      <div id="hypBars"></div>
+
+      <!-- Hypothesis chips -->
+      <div class="chip-row" id="hypChips"></div>
+
+      <!-- Risk Flags -->
+      <div id="riskSection" style="display:none;">
+        <div class="section-title" style="color:var(--crimson);">⚠️ Risk Flags</div>
+        <div class="risk-wrap" id="riskList"></div>
+      </div>
+
+      <!-- Narrative Summary -->
+      <div class="section-title">📝 Narrative Summary</div>
+      <div class="narrative-wrap" id="narrative">—</div>
+
+      <!-- Recommendations -->
+      <div class="section-title">📘 Evidence-Based Guidance <span id="recCount" style="background:var(--surface3);padding:0.15rem 0.6rem;border-radius:var(--r-pill);font-size:0.65rem;margin-left:0.3rem;"></span></div>
+      <div id="recList"></div>
+
+      <!-- Export -->
+      <div class="export-wrap">
+        <div class="export-grid">
+          <button class="exbtn primary" id="printBtn">🖨️ Print Report</button>
+          <button class="exbtn" id="csvBtn">📊 Export CSV</button>
+          <button class="exbtn" id="htmlBtn">🌐 Export HTML</button>
+          <button class="exbtn" id="dcmiBtn">📦 Export DCMI</button>
+        </div>
+        <div class="sources-line">
+          Bowlby (1969) · Ainsworth (1978) · Brennan, Clark & Shaver (1998) ECR-R ·<br>
+          Bartholomew & Horowitz (1991) · Mikulincer & Shaver (2007) · Gottman (1994, 2015) ·<br>
+          Hutchison (2024) RRBS · Rusbult et al. (1998, 2011) · Gratz & Roemer (2004) DERS ·<br>
+          Satir (1988) · Main & Hesse (1990) · Herman (1992) · Johnson (2019) EFT
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MODAL GUIDANCE -->
+<!-- GUIDANCE MODAL -->
 <div class="modal-overlay" id="guidanceModal">
-  <div class="modal-content">
-    <button class="modal-close" id="closeGuidanceBtn">✕</button>
-    <h2>User Manual & Scientific References</h2>
-    <p>This tool assesses 8 dimensions of relationship dynamics using 30 items (0‑5 scale). Probabilities are computed via weighted softmax based on research‑informed weights. Recommendations include:</p>
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal">✕</button>
+    <h2>📖 REEC 2.0 — User Manual & Scientific Basis</h2>
+    <p>REEC 2.0 assesses <strong>11 dimensions</strong> of relationship dynamics using <strong>48 items</strong> rated on a 0–5 scale (Never→Always). Probabilities are computed via <em>centred weighted softmax</em>, ensuring neutral answers produce equal baseline probabilities across all 11 hypotheses.</p>
+    <h3>Scoring Method</h3>
+    <p>Each answer is centred: <em>v = (score − 2.5) / 2.5</em>, yielding a range of −1 to +1. Each hypothesis has a signed weight per item (positive = this item raises likelihood; negative = lowers likelihood). The dot product is fed into a numerically-stable softmax. This replaces the original positive-only weighted sum and correctly handles reverse-keyed items (e.g., Repair, Clear Limits).</p>
+    <h3>Dimensions</h3>
     <ul>
-      <li><strong>Main hypotheses</strong> with severity levels (🟢 mild, 🟠 moderate, 🔴 high).</li>
-      <li><strong>Combination patterns</strong> when two hypotheses exceed 30%.</li>
-      <li><strong>Extreme dimension scores</strong> (📈 >80%, 📉 <20%).</li>
+      <li><strong>D1 Attachment Anxiety</strong> — fear of abandonment, hyperactivating strategies (ECR-R, Brennan et al. 1998)</li>
+      <li><strong>D2 Attachment Avoidance</strong> — discomfort with closeness, deactivating strategies (ECR-R)</li>
+      <li><strong>D3 Boundary Styles</strong> — porous, clear, protective, controlling, respectful (RRBS, Hutchison 2024)</li>
+      <li><strong>D4 Conflict Patterns</strong> — harsh startup, contempt, flooding, repair, stonewalling (Gottman 1994)</li>
+      <li><strong>D5 Relationship Evaluation</strong> — social comparison, feared future, negative vigilance, past comparison</li>
+      <li><strong>D6 Emotional Intimacy</strong> — disclosure, bond, perceived responsiveness, detachment (EIS, Laurenceau et al. 1998)</li>
+      <li><strong>D7 Reciprocity</strong> — equity, mutual initiation, under-benefit (Walster et al. 1978)</li>
+      <li><strong>D8 Commitment</strong> — dedication, constraint, alternatives, investment (Investment Model, Rusbult et al. 1998)</li>
+      <li><strong>D9 Communication Style</strong> — levelling, placating, distracting, computing (Satir 1988)</li>
+      <li><strong>D10 Emotional Regulation</strong> — strategies, impulse control, clarity, overwhelm (DERS, Gratz & Roemer 2004)</li>
+      <li><strong>D11 Disorganised Attachment</strong> — fearful-avoidant, trauma history, rapid shifts, repetition compulsion (Main & Hesse 1990)</li>
     </ul>
-    <p><strong>Key references:</strong></p>
+    <h3>Attachment Types (Four-Category Model)</h3>
     <ul>
-      <li>Bowlby, J. (1969). <em>Attachment and Loss</em>.</li>
-      <li>Ainsworth, M. (1978). <em>Patterns of Attachment</em>.</li>
-      <li>Mikulincer, M. & Shaver, P.R. (2007). <em>Attachment in Adulthood</em>.</li>
-      <li>Gottman, J. (1994). <em>Why Marriages Succeed or Fail</em>.</li>
-      <li>Hutchison, C. (2024). Romantic Relationship Boundaries Scales (RRBS).</li>
-      <li>Rusbult, C.E. et al. (2011). The Investment Model of Commitment.</li>
-      <li>Alexander, R. et al. (2001). ASQ‑SF validation.</li>
-      <li>Bartholomew, K. & Horowitz, L.M. (1991). Four‑category model of attachment.</li>
+      <li><strong>Secure</strong> — low anxiety, low avoidance, low disorganisation</li>
+      <li><strong>Anxious/Preoccupied</strong> — high D1, low D2</li>
+      <li><strong>Dismissive-Avoidant</strong> — low D1, high D2</li>
+      <li><strong>Fearful-Avoidant</strong> — high D1 + D2, or high D11 (disorganised)</li>
     </ul>
-    <p><em>Interpret with caution – relationships are complex and require longitudinal observation.</em></p>
+    <h3>Key References</h3>
+    <ul>
+      <li>Bowlby, J. (1969). <em>Attachment and Loss, Vol. 1.</em></li>
+      <li>Ainsworth, M. (1978). <em>Patterns of Attachment.</em></li>
+      <li>Brennan, K.A., Clark, C.L. & Shaver, P.R. (1998). Self-report measurement of adult romantic attachment: ECR. In J.A. Simpson & W.S. Rholes (Eds.), <em>Attachment Theory and Close Relationships</em>, 46–76.</li>
+      <li>Bartholomew, K. & Horowitz, L.M. (1991). Attachment styles among young adults. <em>JPSP, 61</em>(2), 226–244.</li>
+      <li>Mikulincer, M. & Shaver, P.R. (2007). <em>Attachment in Adulthood.</em> Guilford.</li>
+      <li>Gottman, J.M. (1994). <em>Why Marriages Succeed or Fail.</em> Simon & Schuster.</li>
+      <li>Gottman, J.M. & Levenson, R.W. (1992). Marital processes predictive of dissolution. <em>JPSP, 63</em>(2), 221–233.</li>
+      <li>Hutchison, C. (2024). Romantic Relationship Boundaries Scales (RRBS): Development and validation. <em>Journal of Social and Personal Relationships.</em></li>
+      <li>Rusbult, C.E., Martz, J.M. & Agnew, C.R. (1998). The Investment Model Scale. <em>Personal Relationships, 5</em>(4), 357–391.</li>
+      <li>Rusbult, C.E. et al. (2011). Investment model. In <em>Handbook of Theories of Social Psychology.</em></li>
+      <li>Gratz, K.L. & Roemer, L. (2004). Multidimensional assessment of emotion regulation and dysregulation. <em>JPSPP, 26</em>(1), 41–54.</li>
+      <li>Satir, V. (1988). <em>The New Peoplemaking.</em> Science and Behavior Books.</li>
+      <li>Main, M. & Hesse, E. (1990). Parents' unresolved traumatic experiences. In Greenberg et al. (Eds.), <em>Attachment in the Preschool Years</em>, 161–182.</li>
+      <li>Herman, J.L. (1992). <em>Trauma and Recovery.</em> Basic Books.</li>
+      <li>Johnson, S.M. (2019). <em>Attachment Theory in Practice: EFT.</em> Guilford.</li>
+      <li>Laurenceau, J.P. et al. (1998). Intimacy as an interpersonal process. <em>JPSP, 74</em>(5), 1238–1251.</li>
+      <li>Walster, E., Walster, G.W. & Berscheid, E. (1978). <em>Equity: Theory and Research.</em> Allyn & Bacon.</li>
+      <li>Le, B. & Agnew, C.R. (2003). Commitment and its theorized determinants. <em>Personal Relationships, 10</em>(1), 37–57.</li>
+    </ul>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:1rem;"><em>Interpret with professional caution. Relationships are dynamic and complex systems. This tool is intended for educational and reflective purposes, not clinical diagnosis.</em></p>
   </div>
 </div>
 
@@ -285,408 +572,890 @@ header p { color: #bdc3c7; margin-top: 0.5rem; }
 (function(){
 'use strict';
 
-// ----- QUESTION BANK (30 items, 0-5 scale) -----
+/* ════════════════════════════════════════════
+   1. CONSTANTS
+════════════════════════════════════════════ */
+
 const QUESTIONS = [
-  { id:'q01', dim:1, text:'I often worry that my partner does not truly care about me.', source:'ASQ-SF' },
-  { id:'q02', dim:1, text:'I fear that my partner will abandon me.', source:'ASQ-SF' },
-  { id:'q03', dim:1, text:'I worry that my partner is not as invested as I am.', source:'ASQ-SF' },
-  { id:'q04', dim:1, text:'I need constant reassurance of my partner\'s feelings.', source:'ASQ-SF' },
-  { id:'q05', dim:2, text:'I feel uncomfortable when my partner gets too close emotionally.', source:'ASQ-SF' },
-  { id:'q06', dim:2, text:'I prefer not to show my partner how I feel deep down.', source:'ASQ-SF' },
-  { id:'q07', dim:2, text:'I find it difficult to depend on my partner.', source:'ASQ-SF' },
-  { id:'q08', dim:2, text:'I am nervous when my partner wants to talk about feelings.', source:'ASQ-SF' },
-  { id:'q09', dim:3, text:'I have difficulty saying "no" to my partner\'s demands.', source:'RRBS - Porous' },
-  { id:'q10', dim:3, text:'I maintain clear limits about what I will and won\'t accept.', source:'RRBS - Clear' },
-  { id:'q11', dim:3, text:'I build walls to protect myself from getting hurt.', source:'RRBS - Protective' },
-  { id:'q12', dim:3, text:'I try to control where my partner goes and who they see.', source:'RRBS - Controlling' },
-  { id:'q13', dim:4, text:'Our arguments start harshly with criticism or blame.', source:'Gottman - Harsh Startup' },
-  { id:'q14', dim:4, text:'During conflicts, we show contempt (sarcasm, mockery).', source:'Gottman - Contempt' },
-  { id:'q15', dim:4, text:'I feel flooded or overwhelmed during disagreements.', source:'Gottman - Flooding' },
-  { id:'q16', dim:4, text:'We successfully repair after conflicts.', source:'Gottman - Repair (reverse)' },
-  { id:'q17', dim:5, text:'I compare my relationship to others I see on social media.', source:'REP - Social Comparison' },
-  { id:'q18', dim:5, text:'I worry about what might go wrong in the future.', source:'REP - Feared Future' },
-  { id:'q19', dim:5, text:'I keep track of negative things my partner does.', source:'REP - Negative Behavior' },
-  { id:'q20', dim:5, text:'I think about how past relationships compare.', source:'REP - Past Comparison' },
-  { id:'q21', dim:6, text:'I feel deep emotional connection with my partner.', source:'Emotional Intensity' },
-  { id:'q22', dim:6, text:'Our emotional bond feels intense and meaningful.', source:'Emotional Intensity' },
-  { id:'q23', dim:6, text:'I feel my partner understands me on a deep level.', source:'Emotional Intensity' },
-  { id:'q24', dim:7, text:'We put equal effort into the relationship.', source:'Reciprocity' },
-  { id:'q25', dim:7, text:'My partner initiates contact as often as I do.', source:'Reciprocity' },
-  { id:'q26', dim:7, text:'We take turns supporting each other.', source:'Reciprocity' },
-  { id:'q27', dim:8, text:'I am dedicated to making this relationship last.', source:'Commitment - Dedication' },
-  { id:'q28', dim:8, text:'I feel trapped by constraints (shared assets, social pressure).', source:'Commitment - Constraints' },
-  { id:'q29', dim:8, text:'I have attractive alternatives outside this relationship.', source:'Commitment - Alternatives (reverse)' },
-  { id:'q30', dim:8, text:'I have invested significant time/energy in this relationship.', source:'Commitment - Investments' }
+  // DIM 1: Attachment Anxiety (ECR-R, Brennan et al. 1998)
+  { id:'q01', dim:1, text:'I often worry that my partner does not truly care about me.', src:'ECR-R', rev:false },
+  { id:'q02', dim:1, text:'I fear that my partner will abandon or leave me.', src:'ECR-R', rev:false },
+  { id:'q03', dim:1, text:'I worry that I care more about this relationship than my partner does.', src:'ASQ-SF', rev:false },
+  { id:'q04', dim:1, text:'I need frequent reassurance to feel confident in my partner\'s affection.', src:'ECR-R', rev:false },
+  { id:'q05', dim:1, text:'When my partner is unavailable, I become anxious or distressed.', src:'ECR-R', rev:false },
+
+  // DIM 2: Attachment Avoidance (ECR-R)
+  { id:'q06', dim:2, text:'I feel uncomfortable when my partner tries to get very close emotionally.', src:'ECR-R', rev:false },
+  { id:'q07', dim:2, text:'I prefer not to share my deeper feelings with my partner.', src:'ECR-R', rev:false },
+  { id:'q08', dim:2, text:'I find it difficult to rely on or depend on my partner.', src:'ECR-R', rev:false },
+  { id:'q09', dim:2, text:'I feel nervous when my partner wants to discuss our feelings.', src:'ASQ-SF', rev:false },
+  { id:'q10', dim:2, text:'I prefer to deal with problems alone rather than involve my partner.', src:'ECR-R', rev:false },
+
+  // DIM 3: Boundary Styles (RRBS, Hutchison 2024)
+  { id:'q11', dim:3, text:'I find it hard to say "no" to my partner\'s demands, even when uncomfortable.', src:'RRBS – Porous', rev:false },
+  { id:'q12', dim:3, text:'I maintain clear personal limits about what I will and will not accept.', src:'RRBS – Clear', rev:true },
+  { id:'q13', dim:3, text:'I build emotional walls to protect myself from being hurt by my partner.', src:'RRBS – Protective', rev:false },
+  { id:'q14', dim:3, text:'I monitor or try to control my partner\'s social activities or whereabouts.', src:'RRBS – Controlling', rev:false },
+  { id:'q15', dim:3, text:'I respect my partner\'s need for personal space and individual pursuits.', src:'RRBS – Healthy', rev:true },
+
+  // DIM 4: Conflict Patterns (Gottman 1994, 2015)
+  { id:'q16', dim:4, text:'Our arguments tend to begin with criticism or blame directed at my partner.', src:'Gottman – Harsh Startup', rev:false },
+  { id:'q17', dim:4, text:'During conflicts, we express contempt (sarcasm, mockery, eye-rolling).', src:'Gottman – Contempt', rev:false },
+  { id:'q18', dim:4, text:'I feel emotionally flooded or overwhelmed during disagreements.', src:'Gottman – Flooding', rev:false },
+  { id:'q19', dim:4, text:'We successfully repair and reconnect with each other after conflicts.', src:'Gottman – Repair', rev:true },
+  { id:'q20', dim:4, text:'I shut down, stonewall, or withdraw completely during heated discussions.', src:'Gottman – Stonewalling', rev:false },
+
+  // DIM 5: Relationship Evaluation (Murray, Holmes & Griffin 1996)
+  { id:'q21', dim:5, text:'I compare my relationship to idealised couples I see on social media.', src:'REP – Social Comparison', rev:false },
+  { id:'q22', dim:5, text:'I frequently worry about what might go wrong in this relationship.', src:'REP – Feared Future', rev:false },
+  { id:'q23', dim:5, text:'I mentally catalogue my partner\'s negative behaviours or mistakes.', src:'REP – Negative Vigilance', rev:false },
+  { id:'q24', dim:5, text:'I often compare this relationship unfavourably to past relationships.', src:'REP – Past Comparison', rev:false },
+
+  // DIM 6: Emotional Intimacy (EIS, Laurenceau et al. 1998)
+  { id:'q25', dim:6, text:'I feel a deep emotional connection with my partner.', src:'EIS – Intimacy', rev:true },
+  { id:'q26', dim:6, text:'Our emotional bond feels intense, genuine, and meaningful.', src:'EIS – Disclosure', rev:true },
+  { id:'q27', dim:6, text:'I feel my partner truly understands and accepts me at a deep level.', src:'EIS – Responsiveness', rev:true },
+  { id:'q28', dim:6, text:'I feel emotionally numb or detached within this relationship.', src:'Alexithymia/Detachment', rev:false },
+
+  // DIM 7: Reciprocity (Equity Theory, Walster et al. 1978)
+  { id:'q29', dim:7, text:'We both invest equal effort and energy into this relationship.', src:'Equity Theory', rev:true },
+  { id:'q30', dim:7, text:'My partner initiates care, contact, and affection as often as I do.', src:'Equity Theory', rev:true },
+  { id:'q31', dim:7, text:'We take turns supporting each other during difficult times.', src:'Reciprocity Scale', rev:true },
+  { id:'q32', dim:7, text:'I feel I give significantly more to this relationship than I receive.', src:'Under-benefit Index', rev:false },
+
+  // DIM 8: Commitment (Investment Model, Rusbult et al. 1998)
+  { id:'q33', dim:8, text:'I am fully dedicated to making this relationship last long-term.', src:'IMS – Dedication', rev:true },
+  { id:'q34', dim:8, text:'I feel trapped in this relationship due to external pressures or constraints.', src:'IMS – Constraint', rev:false },
+  { id:'q35', dim:8, text:'I frequently think about attractive romantic alternatives outside this relationship.', src:'IMS – Alternatives', rev:false },
+  { id:'q36', dim:8, text:'I have deeply invested my time, energy, and self in this relationship.', src:'IMS – Investment', rev:true },
+
+  // DIM 9: Communication Style (Satir 1988; Watzlawick et al. 1967)
+  { id:'q37', dim:9, text:'I express my needs clearly and directly, without aggression or passivity.', src:'Satir – Leveling', rev:true },
+  { id:'q38', dim:9, text:'I agree with my partner to avoid conflict, even when I genuinely disagree.', src:'Satir – Placating', rev:false },
+  { id:'q39', dim:9, text:'I change the subject or use humour to deflect during serious conversations.', src:'Satir – Distracting', rev:false },
+  { id:'q40', dim:9, text:'I rely heavily on logic or lecturing rather than expressing emotions in conflict.', src:'Satir – Computing', rev:false },
+
+  // DIM 10: Emotional Regulation (DERS, Gratz & Roemer 2004)
+  { id:'q41', dim:10, text:'I can calm myself during intense disagreements without shutting down.', src:'DERS – Strategies', rev:true },
+  { id:'q42', dim:10, text:'I act impulsively or say things I regret when experiencing strong emotions.', src:'DERS – Impulse', rev:false },
+  { id:'q43', dim:10, text:'I can clearly identify and name what I am feeling in difficult moments.', src:'DERS – Clarity', rev:true },
+  { id:'q44', dim:10, text:'My emotional reactions in this relationship feel overwhelming and out of control.', src:'DERS – Overwhelm', rev:false },
+
+  // DIM 11: Disorganised / Fearful-Avoidant Attachment (Main & Hesse 1990; Liotti 2004)
+  { id:'q45', dim:11, text:'I simultaneously want closeness with my partner and feel frightened by it.', src:'Fearful-Avoidant – Main & Hesse (1990)', rev:false },
+  { id:'q46', dim:11, text:'My relationship history includes experiences of fear, abuse, or severe neglect.', src:'Trauma-Attachment – Herman (1992)', rev:false },
+  { id:'q47', dim:11, text:'My feelings toward my partner can shift rapidly between deep love and resentment.', src:'Disorganised – Liotti (2004)', rev:false },
+  { id:'q48', dim:11, text:'I find myself repeating painful relationship patterns I cannot fully understand.', src:'Repetition Compulsion – van der Kolk (1989)', rev:false },
 ];
 
-// ----- HYPOTHESES & WEIGHTS -----
-const HYPOTHESES = {
-  H1: { name: 'Secure Attachment', color: '#27ae60' },
-  H2: { name: 'Anxious Attachment', color: '#e67e22' },
-  H3: { name: 'Avoidant Attachment', color: '#3498db' },
-  H4: { name: 'Clear Boundaries', color: '#2ecc71' },
-  H5: { name: 'Boundary Dysfunction', color: '#e74c3c' },
-  H6: { name: 'Constructive Conflict', color: '#f39c12' },
-  H7: { name: 'Destructive Conflict', color: '#c0392b' },
-  H8: { name: 'High Commitment', color: '#9b59b6' }
-};
-
-const WEIGHTS = {
-  H1: [0.8,0.7,0.8,0.6,0.2,0.2,0.3,0.2,0.4,0.9,0.3,0.1,0.2,0.1,0.2,0.9,0.3,0.3,0.2,0.3,0.9,0.9,0.9,0.8,0.7,0.8,0.9,0.2,0.2,0.7],
-  H2: [0.9,0.9,0.9,0.9,0.3,0.3,0.4,0.3,0.7,0.2,0.6,0.3,0.5,0.4,0.6,0.3,0.6,0.7,0.6,0.6,0.5,0.5,0.4,0.3,0.4,0.3,0.6,0.5,0.5,0.6],
-  H3: [0.2,0.2,0.2,0.2,0.9,0.9,0.9,0.9,0.6,0.3,0.8,0.2,0.3,0.2,0.3,0.3,0.4,0.4,0.3,0.4,0.2,0.2,0.2,0.4,0.5,0.4,0.3,0.6,0.6,0.4],
-  H4: [0.6,0.5,0.6,0.5,0.4,0.4,0.3,0.3,0.2,0.9,0.2,0.1,0.2,0.1,0.2,0.8,0.3,0.3,0.2,0.3,0.7,0.7,0.7,0.7,0.7,0.7,0.8,0.3,0.3,0.6],
-  H5: [0.3,0.3,0.3,0.3,0.5,0.5,0.5,0.5,0.8,0.2,0.8,0.9,0.7,0.6,0.7,0.2,0.5,0.5,0.5,0.5,0.3,0.3,0.3,0.3,0.3,0.3,0.2,0.7,0.6,0.3],
-  H6: [0.5,0.4,0.5,0.4,0.4,0.4,0.4,0.4,0.5,0.6,0.4,0.2,0.2,0.2,0.3,0.9,0.4,0.3,0.3,0.3,0.6,0.6,0.6,0.7,0.6,0.7,0.7,0.4,0.4,0.5],
-  H7: [0.3,0.3,0.3,0.3,0.4,0.4,0.4,0.4,0.5,0.2,0.5,0.6,0.9,0.9,0.8,0.2,0.5,0.5,0.5,0.5,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.5,0.5,0.3],
-  H8: [0.6,0.5,0.6,0.5,0.3,0.3,0.3,0.3,0.4,0.7,0.3,0.1,0.2,0.1,0.2,0.7,0.3,0.3,0.2,0.3,0.8,0.8,0.8,0.8,0.8,0.8,0.9,0.8,0.2,0.9]
-};
-
-// ----- BASE RECOMMENDATIONS (with full citations) -----
-const BASE_RECS = {
-  H1: { icon:'🔒', text:'Secure Attachment', why:'Low scores on anxiety and avoidance indicate a secure base. This pattern is associated with higher relationship satisfaction, effective communication, and resilience (Mikulincer & Shaver, 2007; Gottman, 1994).', how:'Maintain open communication, continue building trust, and use conflicts as opportunities for growth.', citations:['Mikulincer, M. & Shaver, P.R. (2007) Attachment in Adulthood','Gottman, J. (1994) Why Marriages Succeed or Fail'] },
-  H2: { icon:'😰', text:'Anxious Attachment', why:'High worry about abandonment and need for reassurance reflect anxious attachment (Alexander et al., 2001). This hyperactivating strategy can lead to emotional volatility.', how:'Practice self‑soothing, communicate needs clearly without accusation, and seek consistent but not excessive reassurance.', citations:['Alexander, R. et al. (2001) ASQ‑SF validation','Bowlby, J. (1969) Attachment and Loss'] },
-  H3: { icon:'🧊', text:'Avoidant Attachment', why:'Discomfort with closeness and emotional withdrawal are hallmarks of avoidant attachment (Bartholomew & Horowitz, 1991). Deactivating strategies limit intimacy but protect against perceived rejection.', how:'Gradually practice vulnerability in safe contexts. Communicate your need for space without disappearing. Work on identifying and expressing emotions.', citations:['Bartholomew, K. & Horowitz, L.M. (1991) Four‑category model','Mikulincer & Shaver (2016) Attachment theory'] },
-  H4: { icon:'🛡️', text:'Clear Boundaries', why:'High scores on clear boundary items indicate healthy limit‑setting (Hutchison, 2024). Clear boundaries correlate with higher relationship satisfaction and lower risk of dating violence.', how:'Continue maintaining your limits while remaining flexible. Teach your partner about your boundaries respectfully.', citations:['Hutchison, C. (2024) Romantic Relationship Boundaries Scales (RRBS)','Altman, I. (1975) Boundary theory'] },
-  H5: { icon:'⚠️', text:'Boundary Dysfunction', why:'Elevated scores on porous, protective, or controlling boundaries suggest boundary challenges (Hutchison, 2024). These patterns are linked to childhood adversity and lower relationship quality.', how:'Identify which boundary style predominates. Porous boundaries need strengthening; protective boundaries need softening; controlling boundaries require professional intervention.', citations:['Hutchison, C. (2024) RRBS','Cook, A. (2015) Complex trauma and boundaries'] },
-  H6: { icon:'🤝', text:'Constructive Conflict', why:'Low harsh startup, low four horsemen, and effective repair attempts characterize constructive conflict (Gottman, 1994). This pattern predicts relationship stability.', how:'Continue using repair attempts effectively. Maintain gentle startups and avoid contempt.', citations:['Gottman, J. (1994) The Seven Principles','Gottman Institute (2025) Relationship Checkup'] },
-  H7: { icon:'🔥', text:'Destructive Conflict', why:'High scores on harsh startup, contempt, flooding, and low repair indicate destructive conflict (Gottman, 1994). This pattern predicts relationship deterioration.', how:'Learn to identify flooding and take breaks. Practice gentle startups. Eliminate contempt entirely. Consider couples therapy.', citations:['Gottman, J. (1994) Four Horsemen','Gottman (2025) Psychometrics'] },
-  H8: { icon:'💎', text:'High Commitment', why:'Strong dedication, high investments, and few attractive alternatives indicate high commitment (Rusbult et al., 2011). This predicts relationship persistence and willingness to sacrifice.', how:'Leverage your commitment to work through difficulties. Continue investing in shared activities. Monitor for signs of feeling trapped versus freely chosen dedication.', citations:['Rusbult, C.E. et al. (2011) Investment Model','Le, B. & Agnew, C.R. (2003) Meta‑analysis'] }
-};
-
-// ----- COMBINATION RECOMMENDATIONS (English + citations) -----
-const COMBINATION_RECS = {
-  H2_H5: { icon:'🌀', text:'Anxious Attachment + Boundary Dysfunction', why:'Anxiety about rejection combined with unhealthy boundaries creates a cycle of codependency (Hutchison, 2024; Mikulincer & Shaver, 2007).', how:'Set small boundaries, practice saying "no," consider couples therapy if needed.', citations:['Hutchison, C. (2024) RRBS','Mikulincer, M. & Shaver, P.R. (2007) Attachment in Adulthood'] },
-  H3_H5: { icon:'🧱', text:'Avoidant Attachment + Protective Boundaries', why:'Avoidance of intimacy and protective walls lead to isolation (Bartholomew & Horowitz, 1991; Hutchison, 2024).', how:'Build trust through small interactions, allow yourself to show needs.', citations:['Bartholomew, K. & Horowitz, L.M. (1991) Four‑category model','Hutchison, C. (2024) RRBS'] },
-  H2_H7: { icon:'⚡', text:'Anxious Attachment + Destructive Conflict', why:'Anxiety triggers criticism, conflict reinforces insecurity (Gottman, 1994; Simpson & Rholes, 2017).', how:'Use time‑outs, practice expressing needs without blame.', citations:['Gottman, J. (1994) Why Marriages Succeed or Fail','Simpson, J.A. & Rholes, W.S. (2017) Attachment theory and research'] },
-  H1_H8: { icon:'🏆', text:'Secure Attachment + High Commitment', why:'Combination of security and dedication forms a foundation for lasting relationships (Rusbult et al., 2011; Mikulincer & Shaver, 2007).', how:'Leverage strengths to face challenges, maintain open communication.', citations:['Rusbult, C.E. et al. (2011) Investment Model','Mikulincer, M. & Shaver, P.R. (2007) Attachment in Adulthood'] }
-};
-
 const DIM_IDS = {
-  1: ['q01','q02','q03','q04'],
-  2: ['q05','q06','q07','q08'],
-  3: ['q09','q10','q11','q12'],
-  4: ['q13','q14','q15','q16'],
-  5: ['q17','q18','q19','q20'],
-  6: ['q21','q22','q23'],
-  7: ['q24','q25','q26'],
-  8: ['q27','q28','q29','q30']
+  1:['q01','q02','q03','q04','q05'],
+  2:['q06','q07','q08','q09','q10'],
+  3:['q11','q12','q13','q14','q15'],
+  4:['q16','q17','q18','q19','q20'],
+  5:['q21','q22','q23','q24'],
+  6:['q25','q26','q27','q28'],
+  7:['q29','q30','q31','q32'],
+  8:['q33','q34','q35','q36'],
+  9:['q37','q38','q39','q40'],
+  10:['q41','q42','q43','q44'],
+  11:['q45','q46','q47','q48'],
 };
-const DIM_NAMES = {1:'Attachment Anxiety',2:'Attachment Avoidance',3:'Boundary Styles',4:'Conflict Patterns',5:'Relationship Evaluation',6:'Emotional Intensity',7:'Reciprocity',8:'Commitment'};
 
-// ----- DEFAULT STATE -----
-const defaultAnswers = () => { const o={}; QUESTIONS.forEach(q=>o[q.id]=3); return o; };
-let learners = []; let activeId = null;
-function initEmptyState() { const id=Date.now(); learners=[{id,name:'Person 1',createdAt:new Date().toISOString(),answers:defaultAnswers()}]; activeId=id; }
+const DIM_NAMES = {
+  1:'Attach. Anxiety', 2:'Attach. Avoidance', 3:'Boundary Styles',
+  4:'Conflict Patterns', 5:'Rel. Evaluation', 6:'Emotional Intimacy',
+  7:'Reciprocity', 8:'Commitment', 9:'Communication',
+  10:'Emot. Regulation', 11:'Disorganised Att.',
+};
 
-// ----- HELPER FUNCTIONS -----
-const $ = id => document.getElementById(id);
-const sel = $('learnerSelect');
-const countSpan = $('learnerCount');
+const DIM_FULL = {
+  1:'Attachment Anxiety', 2:'Attachment Avoidance', 3:'Boundary Styles',
+  4:'Conflict Patterns', 5:'Relationship Evaluation', 6:'Emotional Intimacy',
+  7:'Reciprocity', 8:'Commitment', 9:'Communication Style',
+  10:'Emotional Regulation', 11:'Disorganised Attachment',
+};
 
-function refreshSelect() {
-  sel.innerHTML = learners.map(l=>`<option value="${l.id}" ${l.id===activeId?'selected':''}>${l.name}</option>`).join('');
-  countSpan.textContent = `${learners.length} person${learners.length!==1?'s':''}`;
-}
+// Positive dimensions: high score = healthy (for colour coding)
+const DIM_POSITIVE = { 1:false, 2:false, 3:null, 4:false, 5:false, 6:true, 7:true, 8:true, 9:null, 10:null, 11:false };
 
-function setActive(id) { activeId=id; refreshSelect(); renderQuestions(); updateCard(); }
+const HYPOTHESES = {
+  H1:  { name:'Secure Attachment',          color:'#34d399', chip:'emerald' },
+  H2:  { name:'Anxious/Preoccupied',        color:'#fb923c', chip:'gold' },
+  H3:  { name:'Dismissive-Avoidant',        color:'#38bdf8', chip:'sky' },
+  H4:  { name:'Healthy Boundaries',         color:'#2dd4bf', chip:'teal' },
+  H5:  { name:'Boundary Dysfunction',       color:'#f43f5e', chip:'crimson' },
+  H6:  { name:'Constructive Conflict',      color:'#a3e635', chip:'emerald' },
+  H7:  { name:'Destructive Conflict',       color:'#ef4444', chip:'crimson' },
+  H8:  { name:'High Commitment',            color:'#a78bfa', chip:'purple' },
+  H9:  { name:'Fearful-Avoidant/Disorg.',   color:'#f472b6', chip:'crimson' },
+  H10: { name:'Emotional Dysregulation',    color:'#fbbf24', chip:'gold' },
+  H11: { name:'Communication Dysfunction',  color:'#60a5fa', chip:'sky' },
+};
 
-// ----- RENDER QUESTIONS -----
-function renderQuestions() {
-  const active = learners.find(l=>l.id===activeId);
-  if (!active) return;
-  const ans = active.answers;
-  [1,2,3,4,5,6,7,8].forEach(dim => {
-    const container = $(`dim${dim}`);
-    if (!container) return;
-    container.innerHTML = '';
-    DIM_IDS[dim].forEach(qid => {
-      const q = QUESTIONS.find(x=>x.id===qid);
-      const val = ans[qid] ?? 3;
-      const item = document.createElement('div'); item.className='question-item'; item.dataset.id=qid;
-      let opts = '';
-      [ [0,'Never','sel-0'],[1,'Rarely','sel-1'],[2,'Sometimes','sel-2'],[3,'Often','sel-3'],[4,'Very Often','sel-4'],[5,'Always','sel-5'] ]
-        .forEach(([v,lbl,cls]) => opts += `<div class="q-option ${val===v?cls:''}" data-v="${v}"><span class="dot"></span>${lbl}</div>`);
-      item.innerHTML = `<div class="q-text">${q.text} <span style="font-size:0.7rem;color:var(--muted);">${q.source}</span></div><div class="q-options">${opts}</div>`;
-      container.appendChild(item);
-    });
-  });
-  document.querySelectorAll('.q-option').forEach(opt => opt.addEventListener('click', function(){
-    const item = this.closest('.question-item'); const qid = item.dataset.id; const v = parseInt(this.dataset.v);
-    item.querySelectorAll('.q-option').forEach(o => o.className='q-option');
-    this.classList.add(['sel-0','sel-1','sel-2','sel-3','sel-4','sel-5'][v]);
-    const al = learners.find(l=>l.id===activeId); if(al){ al.answers[qid]=v; updateCard(); }
-  }));
-  updateCompleted();
-}
-function updateCompleted() {
-  const active = learners.find(l=>l.id===activeId);
-  if(!active) return;
-  const done = QUESTIONS.filter(q=>active.answers[q.id]!==undefined).length;
-  $('completedCount').textContent = `${done}/${QUESTIONS.length}`;
-}
+/* ── SIGNED WEIGHT SIGNALS ──
+   p8 = +0.8 (strong positive indicator)
+   p5 = +0.5 (moderate positive)
+   n8 = -0.8 (strong negative indicator)
+   n5 = -0.5 (moderate negative)
+*/
+const SIGNALS = {
+  H1:  { p8:['q12','q15','q19','q25','q26','q27','q37','q41'],
+         p5:['q29','q30','q31','q33','q36','q43'],
+         n8:['q01','q02','q03','q17','q28','q34','q45','q46'],
+         n5:['q04','q05','q06','q07','q08','q14','q20','q22','q32','q38','q42','q44','q47'] },
 
-// ----- COMPUTE PROBABILITIES & DIMENSION SCORES -----
-function computeProbabilities(ans) {
-  const norm = v => (v/5);
-  const values = {};
-  QUESTIONS.forEach(q => values[q.id] = norm(ans[q.id] ?? 3));
-  const varOrder = QUESTIONS.map(q=>q.id);
-  const rawScores = {};
-  for(let h in WEIGHTS) {
-    let sum = 0;
-    for(let i=0;i<varOrder.length;i++) sum += values[varOrder[i]] * WEIGHTS[h][i];
-    rawScores[h] = sum;
+  H2:  { p8:['q01','q02','q03','q04','q05'],
+         p5:['q11','q18','q22','q23','q32','q42','q44','q47','q48'],
+         n8:[],
+         n5:['q07','q08','q12','q13','q19','q25','q33','q37','q41'] },
+
+  H3:  { p8:['q06','q07','q08','q09','q10'],
+         p5:['q13','q20','q28','q35','q39','q40'],
+         n8:[],
+         n5:['q01','q02','q03','q25','q26','q27','q33','q37','q45'] },
+
+  H4:  { p8:['q12','q15','q19','q37','q41','q43'],
+         p5:['q25','q26','q27','q29','q31','q33','q36'],
+         n8:['q14','q17'],
+         n5:['q11','q13','q16','q20','q38','q39','q40','q42','q44'] },
+
+  H5:  { p8:['q11','q13','q14'],
+         p5:['q16','q38','q46','q48'],
+         n8:['q12','q15'],
+         n5:['q19','q25','q29','q37'] },
+
+  H6:  { p8:['q19','q37','q41'],
+         p5:['q25','q26','q27','q29','q31','q43'],
+         n8:['q16','q17','q20'],
+         n5:['q18','q38','q39','q40','q42','q44'] },
+
+  H7:  { p8:['q16','q17','q20'],
+         p5:['q18','q21','q23','q38','q42','q44'],
+         n8:['q19'],
+         n5:['q25','q26','q31','q37','q41','q43'] },
+
+  H8:  { p8:['q33','q36'],
+         p5:['q25','q26','q27','q29','q30','q31'],
+         n8:['q34','q35'],
+         n5:['q32','q21','q24'] },
+
+  H9:  { p8:['q45','q46','q47','q48'],
+         p5:['q01','q06','q13','q18','q42','q44'],
+         n8:['q12','q27'],
+         n5:['q19','q25','q33','q37','q41'] },
+
+  H10: { p8:['q42','q44','q47'],
+         p5:['q18','q28','q32','q45','q48'],
+         n8:['q41','q43'],
+         n5:['q12','q19','q25','q37'] },
+
+  H11: { p8:['q38','q39','q40'],
+         p5:['q16','q17','q20','q21','q32'],
+         n8:['q37'],
+         n5:['q19','q25','q41','q43'] },
+};
+
+// Build weight matrix from signals
+function buildW() {
+  const W = {};
+  for (const h in SIGNALS) {
+    W[h] = {};
+    QUESTIONS.forEach(q => { W[h][q.id] = 0; });
+    const s = SIGNALS[h];
+    s.p8.forEach(id => { if (id in W[h]) W[h][id] = 0.8; });
+    s.p5.forEach(id => { if (id in W[h]) W[h][id] = 0.5; });
+    s.n8.forEach(id => { if (id in W[h]) W[h][id] = -0.8; });
+    s.n5.forEach(id => { if (id in W[h]) W[h][id] = -0.5; });
   }
-  const expScores = {}; let sumExp = 0;
-  for(let h in rawScores) { expScores[h]=Math.exp(rawScores[h]); sumExp+=expScores[h]; }
+  return W;
+}
+const W = buildW();
+
+// ── RECOMMENDATIONS DATABASE ──
+const BASE_RECS = {
+  H1:  { icon:'🔒', text:'Secure Attachment', why:'Low anxiety, low avoidance, and high intimacy indicate a secure attachment style. Securely attached individuals show higher relationship satisfaction, better conflict resolution, and greater resilience under stress (Mikulincer & Shaver, 2007; Kirkpatrick & Davis, 1994).', how:'Maintain open communication; use conflicts as growth opportunities. Model secure behaviour to help an insecurely attached partner move toward security over time — "earned security" is attainable.', citations:['Mikulincer, M. & Shaver, P.R. (2007) Attachment in Adulthood','Kirkpatrick, L.A. & Davis, K.E. (1994) Attachment style and longevity of relationships'] },
+  H2:  { icon:'😰', text:'Anxious/Preoccupied Attachment', why:'High D1 scores reflect hyperactivating strategies: excessive monitoring of partner availability and intense distress at perceived rejection. This pattern originates in inconsistent early caregiving (Bowlby, 1969) and predicts emotional volatility (Simpson & Rholes, 2017).', how:'Practice self-soothing before seeking reassurance. Communicate needs with "I feel…" statements rather than accusations. Therapy modalities: EFT (Johnson, 2019) and schema therapy for early attachment wounds.', citations:['Brennan, K.A. et al. (1998) ECR-R','Bowlby, J. (1969) Attachment and Loss','Johnson, S.M. (2019) Attachment Theory in Practice: EFT'] },
+  H3:  { icon:'🧊', text:'Dismissive-Avoidant Attachment', why:'High D2 scores reflect deactivating strategies: suppression of attachment needs and dismissal of the relationship\'s importance. Bartholomew & Horowitz (1991) link this to a positive self-model but negative model of others.', how:'Gradually practise vulnerability in safe, low-stakes contexts. Communicate your need for space without emotional withdrawal. Develop "emotional vocabulary" through journalling or therapy.', citations:['Bartholomew, K. & Horowitz, L.M. (1991) Four-category model','Mikulincer, M. & Shaver, P.R. (2016) Attachment theory'] },
+  H4:  { icon:'🛡️', text:'Healthy Boundaries', why:'High scores on clear limits, partner respect, and communication indicate adaptive boundary functioning (Hutchison, 2024). Clear boundaries correlate with lower rates of intimate partner conflict and higher relationship quality.', how:'Continue asserting limits with warmth. Educate your partner about your boundaries as an act of care, not rejection. Boundaries enable intimacy by creating safety.', citations:['Hutchison, C. (2024) RRBS','Altman, I. (1975) Privacy and Boundary Regulation'] },
+  H5:  { icon:'⚠️', text:'Boundary Dysfunction', why:'Elevated porous, protective, or controlling boundary items signal relational boundary challenges (Hutchison, 2024). Porous boundaries link to childhood emotional neglect; controlling boundaries to insecure attachment and coercive control tendencies.', how:'Identify predominant pattern: porous (strengthen through assertiveness training), protective (soften incrementally via trust-building), controlling (requires professional intervention and safety assessment).', citations:['Hutchison, C. (2024) RRBS validation','Cook, A. et al. (2017) Complex trauma and interpersonal boundaries'] },
+  H6:  { icon:'🤝', text:'Constructive Conflict', why:'Low Four Horsemen scores and effective repair attempts characterise constructive conflict (Gottman & Levenson, 1992). This predicts relationship stability; repair attempts are the key predictor of relationship success over conflict frequency.', how:'Continue using soft startup language. Maintain repair attempts even during flooding. Practise physiological self-soothing (20-minute breaks) before re-engaging.', citations:['Gottman, J.M. & Levenson, R.W. (1992) Marital processes predictive of dissolution','Gottman, J.M. (1994) Why Marriages Succeed or Fail'] },
+  H7:  { icon:'🔥', text:'Destructive Conflict / Four Horsemen', why:'High scores on criticism, contempt, flooding, and stonewalling indicate Gottman\'s "Four Horsemen" — the strongest predictors of relationship deterioration (Gottman, 1994). Contempt alone predicts divorce with ~93% accuracy in Gottman\'s longitudinal data.', how:'Priority: eliminate contempt entirely. Practise gentle startup (describe your feeling, not your partner\'s flaw). Identify flooding triggers and use structured time-outs. Consider couples therapy — specifically Gottman Method or EFT.', citations:['Gottman, J.M. (1994) Four Horsemen of the Apocalypse','Gottman, J.M. & Silver, N. (1999) The Seven Principles for Making Marriage Work'] },
+  H8:  { icon:'💎', text:'High Commitment', why:'Strong dedication, high investment, and low perceived alternatives indicate high commitment (Rusbult et al., 1998). The Investment Model shows these three factors — satisfaction, investment size, and alternatives quality — jointly determine persistence (Le & Agnew, 2003).', how:'Leverage commitment to work through difficulties. Monitor the distinction between freely chosen dedication and constraint-based entrapment — both predict persistence, but only dedication predicts wellbeing.', citations:['Rusbult, C.E. et al. (1998) Investment Model Scale','Le, B. & Agnew, C.R. (2003) Meta-analysis of Investment Model'] },
+  H9:  { icon:'🌪️', text:'Fearful-Avoidant / Disorganised Attachment', why:'High D11 scores with anxious-avoidant conflict reflect disorganised attachment — characterised by simultaneous activation of approach and avoidance systems (Main & Hesse, 1990). Often rooted in trauma or frightening caregiving. Linked to borderline personality features and complex PTSD (Herman, 1992).', how:'Trauma-informed therapy is strongly indicated (EMDR, somatic experiencing, trauma-focused CBT). Avoid entering high-conflict patterns that reactivate the trauma system. Psychoeducation about nervous system dysregulation can be transformative.', citations:['Main, M. & Hesse, E. (1990) Disorganised/disoriented attachment','Herman, J.L. (1992) Trauma and Recovery','van der Kolk, B. (1989) Compulsion to repeat the trauma'] },
+  H10: { icon:'🌊', text:'Emotional Dysregulation in Relationship', why:'High impulsivity, overwhelm, and low emotional clarity indicate clinically relevant dysregulation in the relational context (Gratz & Roemer, 2004). DERS research shows that emotion dysregulation mediates the link between attachment insecurity and relationship conflict (Mikulincer et al., 2003).', how:'Develop a personalised regulation toolkit: box breathing, grounding exercises, temperature stimulation (cold water on face activates the dive reflex). DBT-informed skills training is highly effective. Practise identifying and naming emotions before responding.', citations:['Gratz, K.L. & Roemer, L. (2004) DERS','Linehan, M.M. (1993) Dialectical Behaviour Therapy','Mikulincer, M. et al. (2003) Attachment and emotion regulation'] },
+  H11: { icon:'📡', text:'Communication Dysfunction', why:'High scores on Satir\'s dysfunctional stances (placating, distracting, computing) and low scores on levelling indicate systemic communication breakdown (Satir, 1988). These patterns often develop as adaptations to unsafe early environments and perpetuate misattunement.', how:'Learn and practise Satir\'s "levelling" stance: simultaneous acknowledgement of self, other, and context. Non-violent communication (NVC; Rosenberg, 2015) provides a structured alternative. Couples communication workshops or therapist-guided communication training recommended.', citations:['Satir, V. (1988) The New Peoplemaking','Rosenberg, M.B. (2015) Nonviolent Communication','Watzlawick, P. et al. (1967) Pragmatics of Human Communication'] },
+};
+
+const COMBO_RECS = {
+  H2_H5:  { icon:'🌀', text:'Anxious Attachment + Boundary Dysfunction', why:'Anxiety about rejection combined with porous boundaries creates codependency cycles — fear of abandonment drives over-accommodation, which breeds resentment (Hutchison, 2024; Mikulincer & Shaver, 2007).', how:'Set small, incremental limits. Use a "24-hour rule" before agreeing to major demands. Consider codependency-specific therapy (e.g., Beattie, 1986 framework).', citations:['Hutchison, C. (2024) RRBS','Mikulincer, M. & Shaver, P.R. (2007)'] },
+  H3_H5:  { icon:'🧱', text:'Avoidant Attachment + Protective Walls', why:'Dismissive avoidance combined with high protective boundary scores creates profound isolation — the person is defended against both intimacy and support (Bartholomew & Horowitz, 1991; Hutchison, 2024).', how:'Build trust through consistent small interactions. Distinguish between healthy distance (self-care) and defensive walls (self-harm). Gradual exposure to emotional vulnerability in therapy.', citations:['Bartholomew, K. & Horowitz, L.M. (1991)','Hutchison, C. (2024) RRBS'] },
+  H2_H7:  { icon:'⚡', text:'Anxious Attachment + Destructive Conflict', why:'Attachment anxiety triggers criticism (Gottman\'s Horseman #1), which escalates to contempt and flooding, reinforcing abandonment fears — a classic demand-withdraw cycle (Gottman, 1994; Simpson & Rholes, 2017).', how:'Identify your personal flooding threshold. Use structured time-outs (Gottman: minimum 20 minutes). Replace criticism with "I notice I\'m feeling scared that…". EFT is the most evidence-based approach for this pattern.', citations:['Gottman, J.M. (1994)','Simpson, J.A. & Rholes, W.S. (2017) Attachment theory and research','Johnson, S.M. (2019) EFT'] },
+  H1_H8:  { icon:'🏆', text:'Secure Attachment + High Commitment', why:'This combination forms the strongest foundation for long-term relationship quality and resilience. Secure attachment provides emotional flexibility; commitment provides motivational persistence (Mikulincer & Shaver, 2007; Rusbult et al., 1998).', how:'Leverage this foundation to navigate external stressors, life transitions, and growth challenges. Invest in continued intentional quality time and relational maintenance behaviours.', citations:['Rusbult, C.E. et al. (1998) Investment Model','Mikulincer, M. & Shaver, P.R. (2007)'] },
+  H9_H10: { icon:'🌋', text:'Disorganised Attachment + Emotional Dysregulation', why:'This combination is associated with complex PTSD presentation in relationships — the nervous system cannot regulate during relational stress because the partner simultaneously represents safety and threat (Herman, 1992; Liotti, 2004).', how:'Specialist trauma-informed care is strongly indicated. Somatic/body-based therapies (Levine, 2010; van der Kolk, 2014) address the physiological component. Stabilisation before relational processing.', citations:['Herman, J.L. (1992) Trauma and Recovery','Liotti, G. (2004) Disorganised attachment','van der Kolk, B. (2014) The Body Keeps the Score'] },
+  H7_H11: { icon:'💥', text:'Destructive Conflict + Communication Dysfunction', why:'Four Horsemen combined with dysfunctional communication styles creates an impasse where neither conflict resolution nor emotional connection is possible (Gottman, 1994; Satir, 1988).', how:'Couples therapy is strongly recommended before further attempts at self-directed change. A trained therapist can interrupt the pattern externally while teaching new communication habits.', citations:['Gottman, J.M. (1994)','Satir, V. (1988) The New Peoplemaking'] },
+  H5_H9:  { icon:'🕸️', text:'Boundary Dysfunction + Disorganised Attachment', why:'Trauma history combined with boundary dysfunction is a hallmark of interpersonal trauma survivors (Herman, 1992; Cook et al., 2017). The person simultaneously cannot hold limits or feel safe.', how:'Trauma processing must precede boundary work. Phase-based treatment (Phase 1: safety and stabilisation; Phase 2: trauma processing; Phase 3: relational consolidation).', citations:['Herman, J.L. (1992)','Cook, A. et al. (2017) Complex trauma'] },
+};
+
+const SCALE_LABELS = ['Never','Rarely','Sometimes','Often','Very Often','Always'];
+
+/* ════════════════════════════════════════════
+   2. STATE
+════════════════════════════════════════════ */
+let profiles = [];
+let activeId = null;
+const LS_KEY = 'reec_v2_profiles';
+
+function defaultAnswers() {
+  const o = {};
+  QUESTIONS.forEach(q => { o[q.id] = undefined; });
+  return o;
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (Array.isArray(saved) && saved.length > 0) {
+        profiles = saved;
+        activeId = profiles[0].id;
+        return;
+      }
+    }
+  } catch(e) {}
+  initDefault();
+}
+function saveState() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(profiles)); } catch(e) {}
+}
+function initDefault() {
+  const id = Date.now();
+  profiles = [{ id, name:'Person 1', createdAt: new Date().toISOString(), answers: defaultAnswers() }];
+  activeId = id;
+}
+function getActive() { return profiles.find(p => p.id === activeId); }
+
+/* ════════════════════════════════════════════
+   3. SCORING ENGINE
+════════════════════════════════════════════ */
+function computeScores(answers) {
+  // Centred normalisation: (v - 2.5) / 2.5 → [-1, +1]
+  // Unanswered items treated as 2.5 (neutral → 0)
+  const c = {};
+  QUESTIONS.forEach(q => {
+    const raw = answers[q.id];
+    c[q.id] = raw !== undefined ? (raw - 2.5) / 2.5 : 0;
+  });
+
+  // Raw scores per hypothesis
+  const raw = {};
+  for (const h in W) {
+    raw[h] = QUESTIONS.reduce((sum, q) => sum + (W[h][q.id] * c[q.id]), 0);
+  }
+
+  // Numerically-stable softmax
+  const maxRaw = Math.max(...Object.values(raw));
+  const exp = {}, sumE = Object.keys(raw).reduce((s, h) => { exp[h] = Math.exp(raw[h] - maxRaw); return s + exp[h]; }, 0);
   const probs = {};
-  for(let h in expScores) probs[h] = expScores[h]/sumExp;
-  const answeredCount = QUESTIONS.filter(q=>ans[q.id]!==undefined).length;
-  const confidence = answeredCount/QUESTIONS.length;
-  const vals = Object.values(values);
-  const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
-  const variance = vals.reduce((a,b)=>a+Math.pow(b-mean,2),0)/vals.length;
-  let trajectory = 'Stable Growth';
-  if(variance>0.15) trajectory = 'Anxious Oscillation';
-  else if(mean<0.4) trajectory = 'Avoidant Distancing';
-  const manip = [values.q11,values.q12,values.q13,values.q14,values.q19].reduce((a,b)=>a+b,0)/5;
-  if(manip>0.7 && variance>0.2) trajectory = 'Manipulative Cycle';
-  return { probs, confidence, trajectory, values };
-}
+  for (const h in exp) probs[h] = exp[h] / sumE;
 
-function computeDimensionScores(values) {
+  // Dimension raw averages (0-1 scale)
   const dimScores = {};
-  for(let d=1;d<=8;d++) {
-    let sum=0;
-    DIM_IDS[d].forEach(qid=>sum+=values[qid]||0);
-    dimScores[d]=sum/DIM_IDS[d].length;
+  for (let d = 1; d <= 11; d++) {
+    const items = DIM_IDS[d];
+    const vals = items.map(id => answers[id] !== undefined ? answers[id] : 2.5);
+    dimScores[d] = vals.reduce((a,b) => a+b, 0) / (vals.length * 5);
   }
-  return dimScores;
+
+  // Bartholomew & Horowitz (1991) four-category attachment classification
+  const anx = dimScores[1], avo = dimScores[2], dis = dimScores[11];
+  let attachType, attachClass;
+  if (dis > 0.62 || (anx > 0.6 && avo > 0.6)) {
+    attachType = 'Fearful-Avoidant'; attachClass = 'fearful';
+  } else if (anx > 0.58 && avo <= 0.52) {
+    attachType = 'Anxious/Preoccupied'; attachClass = 'anxious';
+  } else if (avo > 0.58 && anx <= 0.52) {
+    attachType = 'Dismissive-Avoidant'; attachClass = 'avoidant';
+  } else {
+    attachType = 'Secure'; attachClass = 'secure';
+  }
+
+  // Trajectory algorithm (multi-factor)
+  const conflict = dimScores[4], commit = dimScores[8], intimacy = dimScores[6], dysreg = dimScores[10];
+  let trajectory;
+  if (dis > 0.65) trajectory = 'Chaotic Cycling';
+  else if (conflict > 0.65 && intimacy < 0.4) trajectory = 'Deterioration Risk';
+  else if (anx > 0.65 && commit > 0.6) trajectory = 'Anxious Persistence';
+  else if (avo > 0.65 && intimacy < 0.4) trajectory = 'Avoidant Distancing';
+  else if (commit > 0.68 && intimacy > 0.6 && conflict < 0.45) trajectory = 'Growth Trajectory';
+  else if (dysreg > 0.65) trajectory = 'Regulation-Challenged';
+  else trajectory = 'Stable';
+
+  // Confidence: proportion of answered items
+  const answered = QUESTIONS.filter(q => answers[q.id] !== undefined).length;
+  const confidence = answered / QUESTIONS.length;
+
+  return { probs, dimScores, attachType, attachClass, trajectory, confidence };
 }
 
-// ----- MULTI‑RECOMMENDATION ENGINE -----
-function getAllRecommendations(probs, values) {
-  const recs = [];
+/* ════════════════════════════════════════════
+   4. RISK FLAGS
+════════════════════════════════════════════ */
+function getRiskFlags(answers) {
+  const v = id => answers[id] !== undefined ? answers[id] : 2.5;
+  const flags = [];
+  if (v('q17') >= 4)
+    flags.push({ level:'high', icon:'🚨', text:'Contempt detected — the strongest single predictor of relationship failure and dissolution.', ref:'Gottman & Levenson (1992) · Longitudinal prediction of divorce' });
+  if (v('q14') >= 4)
+    flags.push({ level:'high', icon:'🚨', text:'Controlling behaviour toward partner — associated with coercive control and intimate partner violence risk.', ref:'Johnson, M.P. (2008) A Typology of Domestic Violence' });
+  if (v('q16') >= 4 && v('q17') >= 3 && v('q20') >= 4 && v('q19') <= 1)
+    flags.push({ level:'high', icon:'🚨', text:'Full Four Horsemen pattern present with no repair — critical relationship deterioration profile.', ref:'Gottman, J.M. (1994) Four Horsemen' });
+  if (v('q46') >= 4)
+    flags.push({ level:'moderate', icon:'⚠️', text:'Reported trauma history — trauma-informed approach strongly recommended. Current symptoms may be trauma responses, not attachment style alone.', ref:'Herman, J.L. (1992) Trauma and Recovery' });
+  if (v('q34') >= 4 && v('q33') <= 2)
+    flags.push({ level:'moderate', icon:'⚠️', text:'Constraint-only commitment: feels trapped without dedication. Predicts poor wellbeing even if relationship persists.', ref:'Rusbult et al. (1998) Investment Model; Stanley et al. (2006)' });
+  if (v('q45') >= 4 && v('q47') >= 4)
+    flags.push({ level:'moderate', icon:'⚠️', text:'Fearful-avoidant indicators: simultaneous desire for and fear of closeness with rapid emotional shifts. Professional attachment-focused therapy recommended.', ref:'Main & Hesse (1990); Liotti (2004)' });
+  if (v('q11') >= 4 && v('q14') >= 3)
+    flags.push({ level:'moderate', icon:'⚠️', text:'Porous self-boundaries combined with partner-control: potential codependent dynamic with role-boundary confusion.', ref:'Hutchison, C. (2024) RRBS; Beattie (1986) Codependent No More' });
+  if (v('q42') >= 4 && v('q44') >= 4 && v('q41') <= 2)
+    flags.push({ level:'moderate', icon:'⚠️', text:'High emotional impulsivity and overwhelm with very limited regulation capacity — elevated risk of escalating conflict episodes.', ref:'Gratz & Roemer (2004) DERS; Linehan (1993) DBT' });
+  return flags;
+}
 
-  // 1. Main hypotheses with severity levels
-  const sorted = Object.keys(probs).sort((a,b)=>probs[b]-probs[a]);
+/* ════════════════════════════════════════════
+   5. RECOMMENDATION ENGINE
+════════════════════════════════════════════ */
+function getRecommendations(probs, answers, dimScores) {
+  const recs = [];
+  const sorted = Object.keys(probs).sort((a,b) => probs[b]-probs[a]);
+
+  // Main hypothesis recs (threshold 0.22)
   sorted.forEach(h => {
+    if (probs[h] < 0.22) return;
     const p = probs[h];
-    if(p < 0.25) return;
-    let severity = 'mild', sevColor='🟢';
-    if(p >= 0.7) { severity='high'; sevColor='🔴'; }
-    else if(p >= 0.5) { severity='moderate'; sevColor='🟠'; }
-    else sevColor='🟢';
+    let sev = 'Mild', sIcon = '🟢';
+    if (p >= 0.65) { sev = 'High'; sIcon = '🔴'; }
+    else if (p >= 0.45) { sev = 'Moderate'; sIcon = '🟠'; }
     const base = BASE_RECS[h];
-    if(!base) return;
-    recs.push({
-      icon: sevColor,
-      text: `${base.text} (${severity})`,
-      why: `${severity === 'high' ? 'Significant. ' : severity==='moderate'?'Moderate. ':'Mild. '}${base.why}`,
-      how: base.how,
-      citations: base.citations
-    });
+    if (!base) return;
+    recs.push({ icon: sIcon, text:`${base.text} · ${sev} (${Math.round(p*100)}%)`, why: base.why, how: base.how, citations: base.citations });
   });
 
-  // 2. Combination patterns (pairs with prob >0.3 each)
-  const active = sorted.filter(h=>probs[h]>0.3);
-  for(let i=0;i<active.length;i++) {
-    for(let j=i+1;j<active.length;j++) {
+  // Combination patterns
+  const active = sorted.filter(h => probs[h] > 0.28);
+  for (let i = 0; i < active.length; i++) {
+    for (let j = i+1; j < active.length; j++) {
       const key = `${active[i]}_${active[j]}`;
       const rev = `${active[j]}_${active[i]}`;
-      const combo = COMBINATION_RECS[key] || COMBINATION_RECS[rev];
-      if(combo) recs.push(combo);
+      const combo = COMBO_RECS[key] || COMBO_RECS[rev];
+      if (combo) recs.push(combo);
     }
   }
 
-  // 3. Extreme dimension signals
-  const dimScores = computeDimensionScores(values);
-  Object.keys(dimScores).forEach(d => {
-    const score = dimScores[d];
-    const name = DIM_NAMES[d];
-    if(score >= 0.8) {
-      recs.push({ icon:'📈', text:`Very high on ${name}`, why:`This dimension score is very high (${Math.round(score*100)}%). Pay attention to this aspect.`, how:`Discuss with your partner or a professional.`, citations:[] });
-    } else if(score <= 0.2) {
-      recs.push({ icon:'📉', text:`Very low on ${name}`, why:`This dimension score is very low (${Math.round(score*100)}%). May need development.`, how:`Consider exercises or counseling.`, citations:[] });
-    }
-  });
+  // Extreme dimension flags
+  for (let d = 1; d <= 11; d++) {
+    const s = dimScores[d], name = DIM_FULL[d];
+    if (s >= 0.82)
+      recs.push({ icon:'📈', text:`Very High: ${name} (${Math.round(s*100)}%)`, why:`This dimension is in the top 18% range. Consider focused attention.`, how:'Discuss this dimension with a partner or therapist.', citations:[] });
+    else if (s <= 0.18)
+      recs.push({ icon:'📉', text:`Very Low: ${name} (${Math.round(s*100)}%)`, why:`This dimension is in the bottom 18% range and may need development.`, how:'Targeted exercises or professional guidance can help build this area.', citations:[] });
+  }
 
-  // deduplicate by text
+  // Deduplicate
   const seen = new Set();
-  return recs.filter(r => {
-    if(seen.has(r.text)) return false;
-    seen.add(r.text);
-    return true;
-  });
+  return recs.filter(r => { if (seen.has(r.text)) return false; seen.add(r.text); return true; });
 }
 
-// ----- UPDATE UI -----
-function updateCard() {
-  const active = learners.find(l=>l.id===activeId);
-  if(!active) return;
-  const { probs, confidence, trajectory, values } = computeProbabilities(active.answers);
-  const maxHyp = Object.keys(probs).reduce((a,b)=>probs[a]>probs[b]?a:b,'H1');
-  $('idName').textContent = active.name;
-  $('idTimestamp').textContent = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  $('idPrimary').textContent = `${HYPOTHESES[maxHyp].name} (${Math.round(probs[maxHyp]*100)}%)`;
-  $('idConfidence').textContent = `${Math.round(confidence*100)}%`;
-  $('idTrajectory').textContent = trajectory;
+/* ════════════════════════════════════════════
+   6. NARRATIVE GENERATOR
+════════════════════════════════════════════ */
+function generateNarrative(probs, dimScores, attachType, trajectory) {
+  const top = Object.keys(probs).sort((a,b) => probs[b]-probs[a]).slice(0,2);
+  const h1 = HYPOTHESES[top[0]].name, h2 = HYPOTHESES[top[1]].name;
+  const p1 = Math.round(probs[top[0]]*100), p2 = Math.round(probs[top[1]]*100);
+  const commit = dimScores[8] > 0.62 ? 'strong' : dimScores[8] > 0.42 ? 'moderate' : 'limited';
+  const intimacy = dimScores[6] > 0.62 ? 'deep' : dimScores[6] > 0.42 ? 'developing' : 'restricted';
+  const conflict = dimScores[4] > 0.62 ? 'escalating' : dimScores[4] > 0.42 ? 'present' : 'low';
+  return `The assessment profile most strongly reflects <em>${h1}</em> (${p1}%) with a secondary pattern of <em>${h2}</em> (${p2}%), consistent with a <em>${attachType}</em> attachment orientation (Bartholomew & Horowitz, 1991). Emotional intimacy appears <em>${intimacy}</em>, reciprocity and commitment show <em>${commit}</em> levels, and conflict dynamics are currently <em>${conflict}</em>. The relational trajectory is characterised as <em>${trajectory}</em>. These patterns represent tendencies rather than fixed traits — attachment security is a learnable skill and can shift meaningfully through intentional work and therapeutic support.`;
+}
 
-  const hypChips = Object.keys(probs).map(h => {
-    let cls='blue'; if(h==='H2'||h==='H5'||h==='H7') cls='red'; else if(h==='H1'||h==='H4'||h==='H6') cls='green'; else if(h==='H3') cls='amber'; else if(h==='H8') cls='purple';
-    return `<span class="chip ${cls}">${HYPOTHESES[h].name}: ${Math.round(probs[h]*100)}%</span>`;
-  }).join('');
-  $('idHypChips').innerHTML = hypChips;
+/* ════════════════════════════════════════════
+   7. RADAR CHART
+════════════════════════════════════════════ */
+function drawRadar(dimScoresA, dimScoresB) {
+  const svg = document.getElementById('radarSvg');
+  svg.innerHTML = '';
+  const NS = 'http://www.w3.org/2000/svg';
+  const N = 11, R = 108, cx = 150, cy = 152;
 
-  let barsHtml = '';
-  Object.keys(probs).forEach(h => {
-    barsHtml += `<div class="score-row"><span class="score-lbl">${h}</span><div class="score-track"><div class="score-fill" style="width:${probs[h]*100}%; background:${HYPOTHESES[h].color};"></div></div><span class="score-pct">${Math.round(probs[h]*100)}%</span></div>`;
+  const pts = (r) => Array.from({length:N}, (_,i) => {
+    const a = (i * 2 * Math.PI / N) - Math.PI/2;
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
   });
-  $('hypBars').innerHTML = barsHtml;
 
-  const allRecs = getAllRecommendations(probs, values);
-  $('recCount').textContent = `${allRecs.length} item${allRecs.length!==1?'s':''}`;
-  $('recList').innerHTML = allRecs.map((r,i)=>`
+  // Background rings
+  [0.2,0.4,0.6,0.8,1.0].forEach(f => {
+    const p = document.createElementNS(NS,'polygon');
+    p.setAttribute('points', pts(R*f).map(pt=>`${pt.x.toFixed(1)},${pt.y.toFixed(1)}`).join(' '));
+    p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(255,255,255,0.06)');
+    p.setAttribute('stroke-width','1'); svg.appendChild(p);
+  });
+  // Ring labels
+  [0.2,0.4,0.6,0.8].forEach(f => {
+    const t = document.createElementNS(NS,'text');
+    t.setAttribute('x', cx+2); t.setAttribute('y', cy - R*f - 2);
+    t.setAttribute('fill','rgba(255,255,255,0.2)'); t.setAttribute('font-size','7');
+    t.setAttribute('font-family','JetBrains Mono,monospace');
+    t.textContent = Math.round(f*100)+'%'; svg.appendChild(t);
+  });
+
+  // Axes and labels
+  const DIM_SHORT = {1:'Anx',2:'Avo',3:'Bdry',4:'Cnfl',5:'Eval',6:'Intim',7:'Recip',8:'Cmmt',9:'Comm',10:'EmReg',11:'Disg'};
+  for (let i=0; i<N; i++) {
+    const a = (i*2*Math.PI/N) - Math.PI/2;
+    const ex = cx+R*Math.cos(a), ey = cy+R*Math.sin(a);
+    const ln = document.createElementNS(NS,'line');
+    ln.setAttribute('x1',cx); ln.setAttribute('y1',cy);
+    ln.setAttribute('x2',ex.toFixed(1)); ln.setAttribute('y2',ey.toFixed(1));
+    ln.setAttribute('stroke','rgba(255,255,255,0.08)'); ln.setAttribute('stroke-width','1');
+    svg.appendChild(ln);
+
+    const lx = cx+(R+18)*Math.cos(a), ly = cy+(R+18)*Math.sin(a);
+    const txt = document.createElementNS(NS,'text');
+    txt.setAttribute('x',lx.toFixed(1)); txt.setAttribute('y',ly.toFixed(1));
+    txt.setAttribute('text-anchor','middle'); txt.setAttribute('dominant-baseline','middle');
+    txt.setAttribute('fill','rgba(255,255,255,0.45)'); txt.setAttribute('font-size','8.5');
+    txt.setAttribute('font-family','JetBrains Mono,monospace');
+    txt.textContent = DIM_SHORT[i+1]; svg.appendChild(txt);
+  }
+
+  // Data polygon A (gold)
+  const polyPts = (ds, col, fillOp) => {
+    const scores = Array.from({length:N}, (_,i) => ds[i+1] || 0);
+    const coords = scores.map((s,i) => {
+      const a = (i*2*Math.PI/N) - Math.PI/2;
+      return `${(cx+R*s*Math.cos(a)).toFixed(1)},${(cy+R*s*Math.sin(a)).toFixed(1)}`;
+    }).join(' ');
+    const poly = document.createElementNS(NS,'polygon');
+    poly.setAttribute('points',coords);
+    poly.setAttribute('fill',`${col}${Math.round(fillOp*255).toString(16).padStart(2,'0')}`);
+    poly.setAttribute('stroke',col); poly.setAttribute('stroke-width','2');
+    svg.appendChild(poly);
+    // Data dots
+    scores.forEach((s,i) => {
+      const a = (i*2*Math.PI/N) - Math.PI/2;
+      const dot = document.createElementNS(NS,'circle');
+      dot.setAttribute('cx',(cx+R*s*Math.cos(a)).toFixed(1));
+      dot.setAttribute('cy',(cy+R*s*Math.sin(a)).toFixed(1));
+      dot.setAttribute('r','3.5'); dot.setAttribute('fill',col);
+      svg.appendChild(dot);
+    });
+  };
+
+  polyPts(dimScoresA, '#f0b429', 0.18);
+  if (dimScoresB) polyPts(dimScoresB, '#2dd4bf', 0.15);
+}
+
+/* ════════════════════════════════════════════
+   8. UI RENDERING
+════════════════════════════════════════════ */
+// Render all dimension sections
+function renderQuestions() {
+  const container = document.getElementById('dimContainer');
+  const active = getActive();
+  if (!active) return;
+  const ans = active.answers;
+  container.innerHTML = '';
+
+  for (let d=1; d<=11; d++) {
+    const sec = document.createElement('div'); sec.className='dim-section';
+    const completed = DIM_IDS[d].filter(id => ans[id] !== undefined).length;
+    const total = DIM_IDS[d].length;
+    const dimPct = total > 0 ? Math.round((ans[DIM_IDS[d].reduce((a,b)=>{return a;},DIM_IDS[d][0])] !== undefined ? 1 : 0)/1*100) : 0;
+    const avgScore = total > 0 ? (DIM_IDS[d].filter(id=>ans[id]!==undefined).reduce((s,id)=>s+ans[id],0) / (total*5)) : 0;
+
+    sec.innerHTML = `
+      <div class="dim-label" data-dim="${d}">
+        <span class="dim-badge">D${d}</span>
+        <span class="dim-name">${DIM_FULL[d]}</span>
+        <span class="dim-score-mini">${completed}/${total}</span>
+        <span class="dim-toggle open" id="dtoggle${d}">▾</span>
+      </div>
+      <div class="dim-body" id="dbody${d}" style="max-height:9999px;"></div>
+    `;
+    container.appendChild(sec);
+
+    const body = sec.querySelector(`#dbody${d}`);
+    DIM_IDS[d].forEach(qid => {
+      const q = QUESTIONS.find(x=>x.id===qid);
+      const val = ans[qid];
+      const item = document.createElement('div');
+      item.className = 'q-item' + (val!==undefined?' answered':'');
+      item.dataset.id = qid;
+      const btns = SCALE_LABELS.map((lbl,v) =>
+        `<button class="q-btn ${val===v?'s'+v:''}" data-v="${v}">${v} · ${lbl}</button>`
+      ).join('');
+      item.innerHTML = `<div class="q-text">${q.text}${q.rev?'<span title="Reverse-scored item" style="color:var(--teal);font-size:0.65rem;margin-left:0.4rem;font-family:JetBrains Mono,monospace;">[R]</span>':''}<br><span class="q-source">${q.src}</span></div><div class="q-scale">${btns}</div>`;
+      body.appendChild(item);
+    });
+
+    // Toggle collapse
+    sec.querySelector('.dim-label').addEventListener('click', function() {
+      const b = document.getElementById(`dbody${d}`);
+      const t = document.getElementById(`dtoggle${d}`);
+      const isOpen = b.style.maxHeight !== '0px';
+      b.style.maxHeight = isOpen ? '0px' : '9999px';
+      b.style.overflow = isOpen ? 'hidden' : '';
+      t.classList.toggle('open', !isOpen);
+    });
+  }
+
+  // Answer click handlers
+  document.querySelectorAll('.q-scale .q-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.closest('.q-item');
+      const qid = item.dataset.id;
+      const v = parseInt(this.dataset.v);
+      const al = getActive();
+      if (!al) return;
+      al.answers[qid] = v;
+      item.className = 'q-item answered';
+      item.querySelectorAll('.q-btn').forEach(b => b.className='q-btn');
+      this.classList.add('s'+v);
+      saveState();
+      updateResults();
+    });
+  });
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const active = getActive();
+  if (!active) return;
+  const done = QUESTIONS.filter(q => active.answers[q.id] !== undefined).length;
+  const total = QUESTIONS.length;
+  document.getElementById('progressText').textContent = `${done} / ${total}`;
+  document.getElementById('progressFill').style.width = (done/total*100).toFixed(1)+'%';
+}
+
+// Update results panel
+function updateResults() {
+  const active = getActive();
+  if (!active) return;
+  const { probs, dimScores, attachType, attachClass, trajectory, confidence } = computeScores(active.answers);
+
+  // Timestamp
+  document.getElementById('timestamp').textContent = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+
+  // Attachment badge
+  const badge = document.getElementById('attachBadge');
+  badge.className = `attach-badge ${attachClass}`;
+  document.getElementById('attachType').textContent = attachType;
+  document.getElementById('confVal').textContent = Math.round(confidence*100)+'%';
+  document.getElementById('trajVal').textContent = trajectory;
+  const maxH = Object.keys(probs).reduce((a,b)=>probs[a]>probs[b]?a:b);
+  document.getElementById('primaryHyp').textContent = `${HYPOTHESES[maxH].name} (${Math.round(probs[maxH]*100)}%)`;
+
+  // Radar chart
+  const compareCheck = document.getElementById('compareCheck');
+  let dimScoresB = null;
+  if (compareCheck.checked) {
+    const bId = parseInt(document.getElementById('compareB').value);
+    const bProfile = profiles.find(p=>p.id===bId);
+    if (bProfile && bProfile.id !== activeId) {
+      const bScores = computeScores(bProfile.answers);
+      dimScoresB = bScores.dimScores;
+    }
+  }
+  drawRadar(dimScores, dimScoresB);
+
+  // Dimension table
+  const dimTable = document.getElementById('dimTable');
+  dimTable.innerHTML = '';
+  for (let d=1; d<=11; d++) {
+    const s = dimScores[d];
+    const isPos = DIM_POSITIVE[d];
+    let barColor = '#5c7898';
+    if (isPos === true) barColor = s > 0.6 ? '#34d399' : s > 0.4 ? '#fbbf24' : '#f43f5e';
+    else if (isPos === false) barColor = s < 0.4 ? '#34d399' : s < 0.6 ? '#fbbf24' : '#f43f5e';
+    else barColor = '#38bdf8';
+    const row = document.createElement('div'); row.className='dt-row';
+    row.innerHTML = `<span class="dt-label" title="${DIM_FULL[d]}">${DIM_NAMES[d]}</span><div class="dt-track"><div class="dt-fill" style="width:${(s*100).toFixed(1)}%;background:${barColor};"></div></div><span class="dt-val">${Math.round(s*100)}%</span>`;
+    dimTable.appendChild(row);
+  }
+
+  // Hypothesis bars
+  const hypBars = document.getElementById('hypBars');
+  hypBars.innerHTML = Object.keys(probs).map(h =>
+    `<div class="hyp-row"><span class="hyp-lbl">${h}</span><span class="hyp-name">${HYPOTHESES[h].name}</span><div class="hyp-track"><div class="hyp-fill" style="width:${(probs[h]*100).toFixed(1)}%;background:${HYPOTHESES[h].color};"></div></div><span class="hyp-pct">${Math.round(probs[h]*100)}%</span></div>`
+  ).join('');
+
+  // Chips (top 4)
+  const top4 = Object.keys(probs).sort((a,b)=>probs[b]-probs[a]).slice(0,4);
+  document.getElementById('hypChips').innerHTML = top4.map(h =>
+    `<span class="chip ${HYPOTHESES[h].chip}">${HYPOTHESES[h].name} ${Math.round(probs[h]*100)}%</span>`
+  ).join('');
+
+  // Risk flags
+  const flags = getRiskFlags(active.answers);
+  const riskSection = document.getElementById('riskSection');
+  const riskList = document.getElementById('riskList');
+  riskList.innerHTML = '';
+  if (flags.length > 0) {
+    riskSection.style.display = '';
+    flags.forEach(f => {
+      const el = document.createElement('div');
+      el.className = `risk-flag ${f.level}`;
+      el.innerHTML = `<span class="rf-icon">${f.icon}</span><div class="rf-body"><div class="rf-text">${f.text}</div><div class="rf-ref">📖 ${f.ref}</div></div>`;
+      riskList.appendChild(el);
+    });
+  } else {
+    riskSection.style.display = 'none';
+  }
+
+  // Narrative
+  document.getElementById('narrative').innerHTML = generateNarrative(probs, dimScores, attachType, trajectory);
+
+  // Recommendations
+  const allRecs = getRecommendations(probs, active.answers, dimScores);
+  document.getElementById('recCount').textContent = `${allRecs.length}`;
+  document.getElementById('recList').innerHTML = allRecs.map((r,i) => `
     <div class="rec-item" onclick="toggleRec(${i})">
-      <div class="rec-item-top">
+      <div class="rec-top">
         <span class="rec-icon">${r.icon}</span>
         <span class="rec-text">${r.text}</span>
-        <button class="rec-expand-btn" id="rbtn${i}">+ why & how</button>
+        <button class="rec-xbtn" id="rxb${i}">+ details</button>
       </div>
       <div class="rec-detail" id="rdtl${i}">
-        <div class="rec-detail-inner">
+        <div class="rec-inner">
           <div class="rec-why"><strong>Why:</strong> ${r.why}</div>
           <div class="rec-how"><strong>How to respond:</strong> ${r.how}</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:0.5rem;">
-            ${r.citations.map(c=>`<span class="rec-citation">📖 ${c}</span>`).join('')}
-          </div>
+          <div style="margin-top:0.4rem;">${r.citations.map(c=>`<span class="cite-pill">📖 ${c}</span>`).join('')}</div>
         </div>
       </div>
     </div>
   `).join('');
 
-  updateCompleted();
+  updateProgress();
+  updateProfileSelect();
 }
+
 window.toggleRec = function(i) {
-  const dtl = $(`rdtl${i}`); const btn = $(`rbtn${i}`);
-  const open = dtl.classList.toggle('open');
-  if(btn) btn.textContent = open ? '− collapse' : '+ why & how';
+  const d = document.getElementById(`rdtl${i}`);
+  const b = document.getElementById(`rxb${i}`);
+  const open = d.classList.toggle('open');
+  if(b) b.textContent = open ? '− hide' : '+ details';
 };
 
-// ----- LEARNER MANAGEMENT -----
-function addLearner() { const id=Date.now(); learners.push({id,name:`Person ${learners.length+1}`,createdAt:new Date().toISOString(),answers:defaultAnswers()}); setActive(id); toast('New profile added'); }
-function renameLearner() { const al=learners.find(l=>l.id===activeId); if(!al) return; const n=prompt('Enter new name:',al.name); if(n?.trim()){ al.name=n.trim(); refreshSelect(); updateCard(); toast('Renamed'); } }
-function deleteLearner() { if(learners.length<=1) { toast('Cannot delete only person','error'); return; } const al=learners.find(l=>l.id===activeId); if(!confirm(`Delete ${al?.name}?`)) return; learners=learners.filter(l=>l.id!==activeId); setActive(learners[0].id); toast('Deleted'); }
-function resetAnswers() { if(!confirm('Reset answers to "Sometimes"?')) return; const al=learners.find(l=>l.id===activeId); if(al){ al.answers=defaultAnswers(); renderQuestions(); updateCard(); toast('Answers reset'); } }
+/* ════════════════════════════════════════════
+   9. PROFILE MANAGEMENT
+════════════════════════════════════════════ */
+function updateProfileSelect() {
+  const sel = document.getElementById('profileSel');
+  const prev = sel.value;
+  sel.innerHTML = profiles.map(p =>
+    `<option value="${p.id}" ${p.id===activeId?'selected':''}>${p.name}</option>`
+  ).join('');
+  document.getElementById('profileCount').textContent = `${profiles.length} profile${profiles.length!==1?'s':''}`;
+  refreshCompareSels();
+}
 
-// ----- SAMPLE DATA -----
-function loadSampleData() {
-  if(!confirm('Load sample data? This will replace existing profiles.')) return;
-  const id1=Date.now()-4000, id2=Date.now()-3000, id3=Date.now()-2000;
-  learners = [
-    { id:id1, name:'Alex (Secure)', createdAt:new Date().toISOString(), answers:{...defaultAnswers(), q01:1,q02:1,q03:1,q04:1,q05:1,q06:1,q07:1,q08:1,q10:4,q13:1,q14:1,q16:4,q21:4,q22:4,q24:4,q27:4} },
-    { id:id2, name:'Jordan (Anxious)', createdAt:new Date().toISOString(), answers:{...defaultAnswers(), q01:4,q02:4,q03:4,q04:4,q09:4,q11:4,q13:3,q14:3,q17:4,q18:4,q19:4} },
-    { id:id3, name:'Taylor (Avoidant)', createdAt:new Date().toISOString(), answers:{...defaultAnswers(), q05:4,q06:4,q07:4,q08:4,q11:4,q12:3,q15:3,q20:3,q28:3} }
+function refreshCompareSels() {
+  ['compareA','compareB'].forEach((sid,idx) => {
+    const s = document.getElementById(sid);
+    if (!s) return;
+    const prev = parseInt(s.value);
+    s.innerHTML = profiles.map(p=>`<option value="${p.id}" ${p.id===(idx===0?activeId:profiles[profiles.length>1?1:0].id)?'selected':''}>${p.name}</option>`).join('');
+    if (prev && profiles.find(p=>p.id===prev)) s.value = prev;
+  });
+}
+
+function addProfile() {
+  const id = Date.now();
+  profiles.push({ id, name:`Person ${profiles.length+1}`, createdAt:new Date().toISOString(), answers:defaultAnswers() });
+  activeId = id;
+  saveState(); updateProfileSelect(); renderQuestions(); updateResults();
+  toast('New profile added');
+}
+function renameProfile() {
+  const al = getActive(); if(!al) return;
+  const n = prompt('Enter new name:', al.name);
+  if(n?.trim()) { al.name=n.trim(); saveState(); updateProfileSelect(); updateResults(); toast('Renamed'); }
+}
+function deleteProfile() {
+  if(profiles.length<=1) { toast('Cannot delete the only profile','err'); return; }
+  const al = getActive();
+  if(!confirm(`Delete "${al?.name}"?`)) return;
+  profiles = profiles.filter(p=>p.id!==activeId);
+  activeId = profiles[0].id;
+  saveState(); updateProfileSelect(); renderQuestions(); updateResults(); toast('Profile deleted');
+}
+function resetProfile() {
+  if(!confirm('Reset all answers to blank?')) return;
+  const al = getActive(); if(!al) return;
+  al.answers = defaultAnswers();
+  saveState(); renderQuestions(); updateResults(); toast('Answers reset');
+}
+
+/* ════════════════════════════════════════════
+   10. SAMPLE DATA
+════════════════════════════════════════════ */
+function loadSample() {
+  if(!confirm('Load three sample profiles? This will replace existing data.')) return;
+  const t = Date.now();
+  profiles = [
+    { id:t-6000, name:'Alex (Secure)', createdAt:new Date().toISOString(), answers:{
+        q01:1,q02:1,q03:1,q04:1,q05:1, q06:1,q07:1,q08:1,q09:1,q10:1,
+        q11:1,q12:4,q13:1,q14:0,q15:4, q16:1,q17:0,q18:1,q19:4,q20:1,
+        q21:1,q22:1,q23:0,q24:1, q25:4,q26:4,q27:4,q28:0,
+        q29:4,q30:4,q31:4,q32:0, q33:5,q34:0,q35:0,q36:4,
+        q37:4,q38:1,q39:1,q40:1, q41:4,q42:1,q43:4,q44:1,
+        q45:0,q46:0,q47:0,q48:0,
+    }},
+    { id:t-5000, name:'Jordan (Anxious)', createdAt:new Date().toISOString(), answers:{
+        q01:4,q02:4,q03:4,q04:4,q05:4, q06:1,q07:1,q08:2,q09:2,q10:1,
+        q11:4,q12:1,q13:2,q14:1,q15:2, q16:3,q17:2,q18:4,q19:2,q20:1,
+        q21:4,q22:4,q23:3,q24:3, q25:3,q26:3,q27:2,q28:2,
+        q29:2,q30:2,q31:2,q32:4, q33:4,q34:2,q35:2,q36:3,
+        q37:2,q38:3,q39:2,q40:1, q41:2,q42:4,q43:2,q44:3,
+        q45:2,q46:1,q47:3,q48:3,
+    }},
+    { id:t-4000, name:'Taylor (Avoidant)', createdAt:new Date().toISOString(), answers:{
+        q01:1,q02:1,q03:1,q04:1,q05:1, q06:4,q07:4,q08:4,q09:4,q10:4,
+        q11:1,q12:3,q13:4,q14:1,q15:3, q16:1,q17:1,q18:2,q19:3,q20:4,
+        q21:2,q22:1,q23:1,q24:2, q25:1,q26:1,q27:2,q28:3,
+        q29:2,q30:2,q31:2,q32:2, q33:3,q34:2,q35:3,q36:3,
+        q37:2,q38:1,q39:3,q40:4, q41:2,q42:1,q43:2,q44:1,
+        q45:1,q46:0,q47:1,q48:2,
+    }},
   ];
-  activeId = id1; refreshSelect(); renderQuestions(); updateCard(); toast('Sample profiles loaded');
+  activeId = profiles[0].id;
+  saveState(); updateProfileSelect(); renderQuestions(); updateResults();
+  toast('3 sample profiles loaded');
 }
 
-// ----- EXPORT / IMPORT (simplified) -----
-function saveAllJson() {
-  const data = { version:3, exportedAt:new Date().toISOString(), learners };
+/* ════════════════════════════════════════════
+   11. EXPORT FUNCTIONS
+════════════════════════════════════════════ */
+function saveJSON() {
+  const data = { version:2, exportedAt:new Date().toISOString(), tool:'REEC 2.0', profiles };
   const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='reec_profiles.json'; a.click(); URL.revokeObjectURL(url); toast('Profiles saved');
+  dl(blob,'reec2_profiles.json'); toast('JSON saved');
 }
-function loadJson(e) {
+function loadJSON(e) {
   const file = e.target.files[0]; if(!file) return;
   const reader = new FileReader();
   reader.onload = ev => {
     try {
-      const data = JSON.parse(ev.target.result);
-      if(data.learners && Array.isArray(data.learners)) {
-        if(!confirm(`Load ${data.learners.length} profiles?`)) return;
-        learners = data.learners.map(l=>({ id:l.id||Date.now()+Math.random(), name:l.name||'Unnamed', createdAt:l.createdAt||new Date().toISOString(), answers:{...defaultAnswers(), ...(l.answers||{})} }));
-        activeId = learners[0].id; refreshSelect(); renderQuestions(); updateCard(); toast('Loaded');
-      } else toast('Invalid file format','error');
-    } catch(err){ toast('Parse error','error'); }
+      const d = JSON.parse(ev.target.result);
+      const arr = d.profiles || d.learners;
+      if(Array.isArray(arr) && arr.length) {
+        if(!confirm(`Load ${arr.length} profile(s)?`)) return;
+        profiles = arr.map((p,i) => ({
+          id: p.id || Date.now()+i,
+          name: p.name || 'Unnamed',
+          createdAt: p.createdAt || new Date().toISOString(),
+          answers: { ...defaultAnswers(), ...(p.answers||{}) }
+        }));
+        activeId = profiles[0].id;
+        saveState(); updateProfileSelect(); renderQuestions(); updateResults(); toast('Loaded');
+      } else toast('Invalid file','err');
+    } catch { toast('Parse error','err'); }
   };
   reader.readAsText(file); e.target.value='';
 }
 function exportCSV() {
-  const headers = ['Name','H1%','H2%','H3%','H4%','H5%','H6%','H7%','H8%','Primary','Confidence','Trajectory'];
-  const rows = learners.map(l=>{
-    const { probs, confidence, trajectory } = computeProbabilities(l.answers);
-    const max = Object.keys(probs).reduce((a,b)=>probs[a]>probs[b]?a:b);
-    return [l.name, ...Object.values(probs).map(p=>Math.round(p*100)+'%'), HYPOTHESES[max].name, Math.round(confidence*100)+'%', trajectory];
+  const hdrHyp = Object.keys(HYPOTHESES).map(h=>HYPOTHESES[h].name);
+  const hdrDim = Object.values(DIM_FULL);
+  const headers = ['Name','AttachType','Trajectory','Confidence',...hdrHyp,...hdrDim];
+  const rows = profiles.map(p => {
+    const sc = computeScores(p.answers);
+    const hyps = Object.keys(HYPOTHESES).map(h=>Math.round(sc.probs[h]*100)+'%');
+    const dims = Object.keys(DIM_FULL).map(d=>Math.round(sc.dimScores[d]*100)+'%');
+    return [p.name, sc.attachType, sc.trajectory, Math.round(sc.confidence*100)+'%', ...hyps, ...dims];
   });
-  const csv = [headers, ...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='reec_profiles.csv'; a.click(); URL.revokeObjectURL(url); toast('CSV exported');
+  const csv = [headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  dl(new Blob(['\uFEFF'+csv],{type:'text/csv'}),'reec2_data.csv'); toast('CSV exported');
 }
 function exportHTML() {
-  let cards = learners.map(l=>{
-    const { probs, confidence, trajectory } = computeProbabilities(l.answers);
-    const max = Object.keys(probs).reduce((a,b)=>probs[a]>probs[b]?a:b);
-    return `<div style="border:2px solid #2c3e50; padding:1rem; margin-bottom:1rem;"><h2>${l.name}</h2><p><strong>Primary:</strong> ${HYPOTHESES[max].name} (${Math.round(probs[max]*100)}%)</p><p><strong>Confidence:</strong> ${Math.round(confidence*100)}% | <strong>Trajectory:</strong> ${trajectory}</p><p>${Object.keys(probs).map(h=>`${h}:${Math.round(probs[h]*100)}%`).join(' ')}</p></div>`;
+  const cards = profiles.map(p => {
+    const sc = computeScores(p.answers);
+    const hyps = Object.keys(HYPOTHESES).map(h=>`<span style="margin:0.2rem;padding:0.2rem 0.6rem;border-radius:50px;background:#eee;font-size:0.75rem;">${HYPOTHESES[h].name}: ${Math.round(sc.probs[h]*100)}%</span>`).join('');
+    return `<div style="border:2px solid #0e1829;border-radius:16px;padding:1.5rem;margin:1rem 0;font-family:sans-serif;"><h2 style="font-size:1.4rem;margin-bottom:0.5rem;">${p.name}</h2><p><strong>Attachment Type:</strong> ${sc.attachType} &nbsp;|&nbsp; <strong>Trajectory:</strong> ${sc.trajectory} &nbsp;|&nbsp; <strong>Confidence:</strong> ${Math.round(sc.confidence*100)}%</p><div style="margin:0.8rem 0;">${hyps}</div><p style="font-size:0.8rem;color:#666;">Generated ${new Date().toLocaleDateString()} · REEC 2.0</p></div>`;
   }).join('');
-  const html = `<!DOCTYPE html><html><head><title>REEC Report</title><meta charset="UTF-8"></head><body>${cards}</body></html>`;
-  const blob = new Blob([html],{type:'text/html'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='reec_report.html'; a.click(); URL.revokeObjectURL(url); toast('HTML exported');
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>REEC 2.0 Report</title></head><body style="background:#f0f4f8;padding:2rem;max-width:900px;margin:0 auto;">${cards}</body></html>`;
+  dl(new Blob([html],{type:'text/html'}),'reec2_report.html'); toast('HTML exported');
 }
 function exportDCMI() {
-  let xml = `<?xml version="1.0"?>\n<metadata xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">\n`;
-  learners.forEach(l=>{
-    const { probs } = computeProbabilities(l.answers);
-    xml += `  <oai_dc:dc>\n    <dc:title>${l.name} - REEC Profile</dc:title>\n    <dc:date>${l.createdAt}</dc:date>\n    <dc:description>${Object.keys(probs).map(h=>`${h}:${Math.round(probs[h]*100)}%`).join('; ')}</dc:description>\n  </oai_dc:dc>\n`;
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<metadata xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">\n`;
+  profiles.forEach(p => {
+    const sc = computeScores(p.answers);
+    const desc = Object.keys(HYPOTHESES).map(h=>`${HYPOTHESES[h].name}:${Math.round(sc.probs[h]*100)}%`).join('; ');
+    xml += `  <oai_dc:dc>\n    <dc:title>${p.name} – REEC 2.0 Profile</dc:title>\n    <dc:type>Dataset</dc:type>\n    <dc:date>${p.createdAt}</dc:date>\n    <dc:subject>Relationship Dynamics · ${sc.attachType}</dc:subject>\n    <dc:description>${desc}</dc:description>\n    <dc:format>application/xml</dc:format>\n  </oai_dc:dc>\n`;
   });
   xml += `</metadata>`;
-  const blob = new Blob([xml],{type:'application/xml'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='reec_dcmi.xml'; a.click(); URL.revokeObjectURL(url); toast('DCMI exported');
+  dl(new Blob([xml],{type:'application/xml'}),'reec2_dcmi.xml'); toast('DCMI exported');
 }
-function printAllBadges() {
-  if(learners.length===0) return toast('No data to print','error');
-  let printArea = $('#print-area');
-  if(!printArea) { printArea = document.createElement('div'); printArea.id='print-area'; document.body.appendChild(printArea); }
-  let html = '';
-  learners.forEach(l=>{
-    const { probs, confidence, trajectory } = computeProbabilities(l.answers);
-    const max = Object.keys(probs).reduce((a,b)=>probs[a]>probs[b]?a:b);
-    html += `<div style="page-break-after:always; padding:1rem;"><h2>${l.name}</h2><p>Primary: ${HYPOTHESES[max].name} (${Math.round(probs[max]*100)}%)</p><p>Confidence: ${Math.round(confidence*100)}%</p><p>Trajectory: ${trajectory}</p><p>${new Date().toLocaleDateString()}</p></div>`;
-  });
-  printArea.innerHTML = html;
-  setTimeout(()=>{ window.print(); setTimeout(()=>{ printArea.innerHTML=''; },1000); },100);
+function printReport() {
+  window.print();
+}
+function dl(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download=name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
-// ----- TOAST -----
-let toastTimer;
-function toast(msg, type='success') {
-  const el = $('toast');
-  el.textContent = (type==='success'?'✓ ':'⚠ ')+msg;
-  el.className = `toast show${type==='error'?' error':''}`;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>{ el.className='toast'; }, 2800);
+/* ════════════════════════════════════════════
+   12. TOAST
+════════════════════════════════════════════ */
+let _toastT;
+function toast(msg, type='ok') {
+  const el = document.getElementById('toast');
+  el.textContent = (type==='ok'?'✓ ':'⚠ ')+msg;
+  el.className = `toast show ${type}`;
+  clearTimeout(_toastT);
+  _toastT = setTimeout(()=>{ el.className='toast'; },2600);
 }
 
-// ----- EVENT LISTENERS -----
-$('addBtn').addEventListener('click', addLearner);
-$('renameBtn').addEventListener('click', renameLearner);
-$('deleteBtn').addEventListener('click', deleteLearner);
-$('resetBtn').addEventListener('click', resetAnswers);
-sel.addEventListener('change', e=>setActive(parseInt(e.target.value)));
-$('saveJsonBtn').addEventListener('click', saveAllJson);
-$('loadJsonInput').addEventListener('change', loadJson);
-$('exportPdfBtn').addEventListener('click', printAllBadges);
-$('exportCsvBtn').addEventListener('click', exportCSV);
-$('exportHtmlBtn').addEventListener('click', exportHTML);
-$('guidanceBtn').addEventListener('click', ()=>$('guidanceModal').classList.add('show'));
-$('closeGuidanceBtn').addEventListener('click', ()=>$('guidanceModal').classList.remove('show'));
-$('guidanceModal').addEventListener('click', e=>{ if(e.target===$('guidanceModal')) $('guidanceModal').classList.remove('show'); });
-$('exportDcmBtn').addEventListener('click', exportDCMI);
-$('loadSampleBtn').addEventListener('click', loadSampleData);
+/* ════════════════════════════════════════════
+   13. EVENT LISTENERS
+════════════════════════════════════════════ */
+document.getElementById('addBtn').addEventListener('click', addProfile);
+document.getElementById('renameBtn').addEventListener('click', renameProfile);
+document.getElementById('delBtn').addEventListener('click', deleteProfile);
+document.getElementById('resetBtn').addEventListener('click', resetProfile);
+document.getElementById('profileSel').addEventListener('change', e => {
+  activeId = parseInt(e.target.value);
+  renderQuestions(); updateResults();
+});
+document.getElementById('guidanceBtn').addEventListener('click', ()=>document.getElementById('guidanceModal').classList.add('open'));
+document.getElementById('closeModal').addEventListener('click', ()=>document.getElementById('guidanceModal').classList.remove('open'));
+document.getElementById('guidanceModal').addEventListener('click', e=>{ if(e.target===document.getElementById('guidanceModal')) document.getElementById('guidanceModal').classList.remove('open'); });
+document.getElementById('sampleBtn').addEventListener('click', loadSample);
+document.getElementById('saveJsonBtn').addEventListener('click', saveJSON);
+document.getElementById('loadFileInput').addEventListener('change', loadJSON);
+document.getElementById('printBtn').addEventListener('click', printReport);
+document.getElementById('csvBtn').addEventListener('click', exportCSV);
+document.getElementById('htmlBtn').addEventListener('click', exportHTML);
+document.getElementById('dcmiBtn').addEventListener('click', exportDCMI);
 
-// ----- INIT -----
-initEmptyState();
-refreshSelect();
+document.getElementById('compareCheck').addEventListener('change', function() {
+  document.getElementById('compareSelects').style.display = this.checked ? 'flex' : 'none';
+  updateResults();
+});
+document.getElementById('compareA').addEventListener('change', updateResults);
+document.getElementById('compareB').addEventListener('change', updateResults);
+
+/* ════════════════════════════════════════════
+   14. INIT
+════════════════════════════════════════════ */
+loadState();
+updateProfileSelect();
 renderQuestions();
-updateCard();
+updateResults();
 
 })();
 </script>
